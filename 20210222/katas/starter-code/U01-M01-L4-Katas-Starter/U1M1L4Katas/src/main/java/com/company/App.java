@@ -1,3 +1,8 @@
+/*
+* Script Credits: Your Name Here
+* References used:
+* * https://www.somelink.com/page-with-script-information
+*/
 package com.company;
 
 public class App {
@@ -23,7 +28,7 @@ public class App {
         int firstMin = Math.min(x, y);
         return Math.min(firstMin, z);
     }
-    
+
 	// isLarger
     public static boolean isLarger(int x, int y){
         return x > y;
