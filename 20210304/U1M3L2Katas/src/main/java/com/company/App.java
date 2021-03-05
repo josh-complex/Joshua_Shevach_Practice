@@ -46,7 +46,7 @@ public class App {
         List<Integer> lessThan = numbers.stream()
                 .filter(x -> x < 5)
                 .collect(Collectors.toList());
-        return lessThan.size() > 0 ? lessThan : null;
+        return !lessThan.isEmpty() ? lessThan : null;
     }
 
     //challenge

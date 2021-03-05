@@ -1,0 +1,9 @@
+Pitcher: Mike Foltynewicz
+Catcher: Brian McCann
+First Baseman: Freddie Freeman
+Second Baseman: Ozzie Albies
+Third Baseman: Josh Donaldson
+Shortstop: Dansby Swanson
+Left Fielder: Ronald Acuna, Jr.
+Center Fielder: Ender Inciarte
+Right Fielder: Nick Markakis
