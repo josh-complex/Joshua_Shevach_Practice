@@ -1,9 +1,8 @@
 package com.company.modulesixgroupactivity.dao;
 
-import com.company.modulesixgroupactivity.model.Customer;
-import com.company.modulesixgroupactivity.model.Invoice;
 import com.company.modulesixgroupactivity.model.InvoiceItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +17,16 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
     private JdbcTemplate jdbcTemplate;
 
     private static final String INSERT_INVOICE_ITEM_SQL =
-            "insert into invoice (customer_id, order_date, pickup_date, return_date, late_fee) values (?, ?, ?, ?, ?)";
+            "insert into invoice_item (invoice_id, item_id, quantity, unit_rate, discount) values (?, ?, ?, ?, ?)";
 
-    private static final String SELECT_INVOICE_ITEM_BY_CUSTOMER_SQL =
-            "select * from invoice where invoice_id = ?";
+    private static final String SELECT_INVOICE_ITEM_SQL =
+            "select * from invoice_item where invoice_item_id = ?";
+
+    private static final String SELECT_ALL_INVOICE_ITEMS_SQL =
+            "select * from invoice_item";
 
     private static final String DELETE_INVOICE_ITEM_SQL =
-            "delete from invoice where invoice_id = ?";
+            "delete from invoice_item where invoice_item_id = ?";
 
 
     @Autowired
@@ -34,36 +36,52 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
 
     @Override
     @Transactional
-    public InvoiceItem addInvoiceItem(InvoiceItem invoice) {
-        return null;
+    public InvoiceItem addInvoiceItem(InvoiceItem invoiceItem) {
+        jdbcTemplate.update(
+                INSERT_INVOICE_ITEM_SQL,
+                invoiceItem.getInvoiceId(),
+                invoiceItem.getItemId(),
+                invoiceItem.getQuantity(),
+                invoiceItem.getUnitRate(),
+                invoiceItem.getDiscount()
+        );
+
+        int id = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
+
+        invoiceItem.setInvoiceItemId(id);
+
+        return invoiceItem;
     }
 
     @Override
     public InvoiceItem getInvoiceItem(int id) {
-        return null;
+        try {
+            return jdbcTemplate.queryForObject(SELECT_INVOICE_ITEM_SQL, this::mapRowToInvoiceItem, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public List<InvoiceItem> getAllInvoiceItems() {
-        return null;
+        return jdbcTemplate.query(SELECT_ALL_INVOICE_ITEMS_SQL, this::mapRowToInvoiceItem);
     }
 
     @Override
     public void deleteInvoiceItem(int id) {
-
+        jdbcTemplate.update(DELETE_INVOICE_ITEM_SQL, id);
     }
 
-    private Invoice mapRowToInvoice(ResultSet rs, int rowNum) throws SQLException {
+    private InvoiceItem mapRowToInvoiceItem(ResultSet rs, int rowNum) throws SQLException {
+        InvoiceItem invoiceItem = new InvoiceItem();
+        invoiceItem.setInvoiceItemId(rs.getInt("invoice_item_id"));
+        invoiceItem.setInvoiceId(rs.getInt("invoice_id"));
+        invoiceItem.setItemId(rs.getInt("item_id"));
+        invoiceItem.setQuantity(rs.getInt("quantity"));
+        invoiceItem.setDiscount(rs.getBigDecimal("discount"));
+        invoiceItem.setUnitRate(rs.getBigDecimal("unit_rate"));
 
-        Invoice invoice = new Invoice();
-        invoice.setInvoiceId(rs.getInt("invoice_id"));
-        invoice.setCustomerId(rs.getInt("customer_id"));
-        invoice.setLateFee(rs.getBigDecimal("late_fee"));
-        invoice.setOrderDate(rs.getDate("order_date").toLocalDate());
-        invoice.setPickupDate(rs.getDate("pickup_date").toLocalDate());
-        invoice.setReturnDate(rs.getDate("return_date").toLocalDate());
-
-        return invoice;
+        return invoiceItem;
 
     }
 }

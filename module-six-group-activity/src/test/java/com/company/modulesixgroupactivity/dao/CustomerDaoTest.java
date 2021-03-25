@@ -21,10 +21,8 @@ public class CustomerDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        List<Customer> customerList = customerDao.getAllCustomers();
-
-        for (Customer itr : customerList)
-            customerDao.deleteCustomer(itr.getCustomerId());
+        customerDao.getAllCustomers()
+                .forEach(x -> customerDao.deleteCustomer(x.getCustomerId()));
     }
 
     @Test
