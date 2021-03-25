@@ -1,5 +1,6 @@
 package com.company.modulesixgroupactivity.dao;
 
+import com.company.modulesixgroupactivity.model.Customer;
 import com.company.modulesixgroupactivity.model.Invoice;
 
 import java.util.List;
@@ -7,9 +8,8 @@ import java.util.List;
 public interface InvoiceDao {
 
     Invoice addInvoice(Invoice invoice);
-    Invoice getInvoice(int id);
     List<Invoice> getAllInvoices();
-    void updateInvoice(Invoice invoice);
+    List<Invoice> getInvoicesByCustomer(Customer customer);
     void deleteInvoice(int id);
 
 }

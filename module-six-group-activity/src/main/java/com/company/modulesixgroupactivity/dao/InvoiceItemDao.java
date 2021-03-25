@@ -1,12 +1,12 @@
 package com.company.modulesixgroupactivity.dao;
 
-import com.company.modulesixgroupactivity.model.Invoice;
+import com.company.modulesixgroupactivity.model.InvoiceItem;
 
 import java.util.List;
 
-public interface InvoiceItem {
+public interface InvoiceItemDao {
 
-    Invoice addInvoiceItem(InvoiceItem invoiceItem);
+    InvoiceItem addInvoiceItem(InvoiceItem invoiceItem);
     InvoiceItem getInvoiceItem(int id);
     List<InvoiceItem> getAllInvoiceItems();
     void deleteInvoiceItem(int id);

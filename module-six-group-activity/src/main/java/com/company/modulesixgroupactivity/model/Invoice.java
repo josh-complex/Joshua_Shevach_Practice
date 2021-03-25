@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -14,9 +14,9 @@ public class Invoice {
 
     private int invoiceId;
     private int customerId;
-    private Date orderDate;
-    private Date pickupDate;
-    private Date returnDate;
+    private LocalDate orderDate;
+    private LocalDate pickupDate;
+    private LocalDate returnDate;
     private BigDecimal lateFee;
 
 }

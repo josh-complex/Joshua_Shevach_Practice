@@ -2,7 +2,7 @@ package com.company.modulesixgroupactivity.viewmodel;
 
 import com.company.modulesixgroupactivity.model.Customer;
 import com.company.modulesixgroupactivity.model.Invoice;
-import com.company.modulesixgroupactivity.model.Item;
+import com.company.modulesixgroupactivity.model.InvoiceItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class InvoiceViewModel {
     private int id;
     private Customer customer;
     private Invoice invoice;
-    private List<Item> item;
+    private List<InvoiceItem> item;
     private Date orderDate;
     private Date pickupDate;
     private Date returnDate;
