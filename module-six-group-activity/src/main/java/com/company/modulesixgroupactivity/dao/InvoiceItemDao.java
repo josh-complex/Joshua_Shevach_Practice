@@ -9,7 +9,6 @@ public interface InvoiceItem {
     Invoice addInvoiceItem(InvoiceItem invoiceItem);
     InvoiceItem getInvoiceItem(int id);
     List<InvoiceItem> getAllInvoiceItems();
-    void updateInvoiceItem(InvoiceItem invoiceItem);
     void deleteInvoiceItem(int id);
     
 }
