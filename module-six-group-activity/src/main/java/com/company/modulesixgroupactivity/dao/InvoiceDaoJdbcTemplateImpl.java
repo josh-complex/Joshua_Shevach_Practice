@@ -3,9 +3,11 @@ package com.company.modulesixgroupactivity.dao;
 import com.company.modulesixgroupactivity.model.Customer;
 import com.company.modulesixgroupactivity.model.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +20,9 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
 
     private static final String INSERT_INVOICE_SQL =
             "insert into invoice (customer_id, order_date, pickup_date, return_date, late_fee) values (?, ?, ?, ?, ?)";
+
+    private static final String SELECT_INVOICE_BY_ID_SQL =
+            "select * from invoice where invoice_id = ?";
 
     private static final String SELECT_ALL_INVOICES_SQL =
             "select * from invoice";
@@ -51,6 +56,15 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
         invoice.setInvoiceId(id);
 
         return invoice;
+    }
+
+    @Override
+    public Invoice getInvoice(int id) {
+        try {
+            return jdbcTemplate.queryForObject(SELECT_INVOICE_BY_ID_SQL, this::mapRowToInvoice, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override

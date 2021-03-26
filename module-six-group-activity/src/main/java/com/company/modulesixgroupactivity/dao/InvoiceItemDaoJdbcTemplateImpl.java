@@ -25,6 +25,9 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
     private static final String SELECT_ALL_INVOICE_ITEMS_SQL =
             "select * from invoice_item";
 
+    private static final String SELECT_ALL_INVOICE_ITEMS_BY_INVOICE_ID_SQL =
+            "select * from invoice_item where invoice_id = ?";
+
     private static final String DELETE_INVOICE_ITEM_SQL =
             "delete from invoice_item where invoice_item_id = ?";
 
@@ -60,6 +63,11 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<InvoiceItem> getAllInvoiceItemsByInvoiceId(int id) {
+        return jdbcTemplate.query(SELECT_ALL_INVOICE_ITEMS_BY_INVOICE_ID_SQL, this::mapRowToInvoiceItem, id);
     }
 
     @Override

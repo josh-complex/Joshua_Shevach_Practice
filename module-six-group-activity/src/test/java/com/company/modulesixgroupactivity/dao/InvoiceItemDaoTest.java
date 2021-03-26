@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -90,5 +91,115 @@ public class InvoiceItemDaoTest {
         invoiceItem2 = invoiceItemDao.getInvoiceItem(invoiceItem.getInvoiceId());
 
         assertNull(invoiceItem2);
+    }
+
+    @Test
+    public void shouldGetInvoiceItemsByInvoiceId() {
+        Customer customer = customerDao.addCustomer(new Customer(
+                0,
+                "Tiani",
+                "Edwards",
+                "tiani@heckyeah.com",
+                "Cognizant",
+                "8675309"
+        ));
+
+        Item item = itemDao.addItem(new Item(
+                0,
+                "Deep Tissue Massager",
+                "Massage all the knots out of everywhere",
+                new BigDecimal("3.95")
+        ));
+
+        Invoice invoice = invoiceDao.addInvoice(new Invoice(
+                0,
+                customer.getCustomerId(),
+                LocalDate.of(2021, 02, 12),
+                LocalDate.of(2021, 02, 14),
+                LocalDate.of(2021, 02, 15),
+                new BigDecimal("50.00")
+        ));
+
+        BigDecimal itemQuantity = new BigDecimal("2");
+        int actualQuantity = Integer.parseInt(itemQuantity.toString());
+
+        InvoiceItem invoiceItem = invoiceItemDao.addInvoiceItem(new InvoiceItem(
+                0,
+                invoice.getInvoiceId(),
+                item.getItemId(),
+                actualQuantity,
+                item.getDailyRate().multiply(itemQuantity),
+                new BigDecimal("0.00")
+        ));
+
+        Customer customer2 = customerDao.addCustomer(new Customer(
+                0,
+                "Tiani",
+                "Edwards",
+                "tiani@heckyeah.com",
+                "Cognizant",
+                "8675309"
+        ));
+
+        Item item2 = itemDao.addItem(new Item(
+                0,
+                "Deep Tissue Massager",
+                "Massage all the knots out of everywhere",
+                new BigDecimal("3.95")
+        ));
+
+        Invoice invoice2 = invoiceDao.addInvoice(new Invoice(
+                0,
+                customer2.getCustomerId(),
+                LocalDate.of(2021, 02, 12),
+                LocalDate.of(2021, 02, 14),
+                LocalDate.of(2021, 02, 15),
+                new BigDecimal("50.00")
+        ));
+
+        itemQuantity = new BigDecimal("2");
+        actualQuantity = Integer.parseInt(itemQuantity.toString());
+
+        InvoiceItem invoiceItem2 = invoiceItemDao.addInvoiceItem(new InvoiceItem(
+                0,
+                invoice2.getInvoiceId(),
+                item2.getItemId(),
+                actualQuantity,
+                item2.getDailyRate().multiply(itemQuantity),
+                new BigDecimal("0.00")
+        ));
+
+        Customer customer3 = customerDao.addCustomer(new Customer(
+                0,
+                "Tiani",
+                "Edwards",
+                "tiani@heckyeah.com",
+                "Cognizant",
+                "8675309"
+        ));
+
+        Item item3 = itemDao.addItem(new Item(
+                0,
+                "Deep Tissue Massager",
+                "Massage all the knots out of everywhere",
+                new BigDecimal("3.95")
+        ));
+
+        itemQuantity = new BigDecimal("2");
+        actualQuantity = Integer.parseInt(itemQuantity.toString());
+
+        InvoiceItem invoiceItem3 = invoiceItemDao.addInvoiceItem(new InvoiceItem(
+                0,
+                invoice2.getInvoiceId(),
+                item3.getItemId(),
+                actualQuantity,
+                item3.getDailyRate().multiply(itemQuantity),
+                new BigDecimal("0.00")
+        ));
+
+        List<InvoiceItem> invoiceItems = invoiceItemDao.getAllInvoiceItemsByInvoiceId(invoice2.getInvoiceId());
+
+        assertEquals(2, invoiceItems.size());
+
     }
 }

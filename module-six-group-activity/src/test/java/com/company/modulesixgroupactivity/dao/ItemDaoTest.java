@@ -17,12 +17,24 @@ import static org.junit.Assert.*;
 public class ItemDaoTest {
 
     @Autowired
+    private InvoiceDao invoiceDao;
+    @Autowired
+    private CustomerDao customerDao;
+    @Autowired
+    private InvoiceItemDao invoiceItemDao;
+    @Autowired
     private ItemDao itemDao;
 
     @Before
     public void setUp() throws Exception {
+        invoiceItemDao.getAllInvoiceItems()
+                .forEach(x -> invoiceItemDao.deleteInvoiceItem(x.getInvoiceItemId()));
+        invoiceDao.getAllInvoices()
+                .forEach(x -> invoiceDao.deleteInvoice(x.getInvoiceId()));
         itemDao.getAllItems()
                 .forEach(x -> itemDao.deleteItem(x.getItemId()));
+        customerDao.getAllCustomers()
+                .forEach(x -> customerDao.deleteCustomer(x.getCustomerId()));
     }
 
     @Test
@@ -70,7 +82,7 @@ public class ItemDaoTest {
         Item item = new Item(
                 0,
                 "Deep Tissue Massager",
-                "Massage all the knots out of everywhere",
+                "Massage all the knots out of everyone",
                 new BigDecimal("3.95")
         );
 

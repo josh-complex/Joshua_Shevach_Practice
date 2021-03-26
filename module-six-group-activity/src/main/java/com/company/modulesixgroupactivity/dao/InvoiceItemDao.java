@@ -8,6 +8,7 @@ public interface InvoiceItemDao {
 
     InvoiceItem addInvoiceItem(InvoiceItem invoiceItem);
     InvoiceItem getInvoiceItem(int id);
+    List<InvoiceItem> getAllInvoiceItemsByInvoiceId(int id);
     List<InvoiceItem> getAllInvoiceItems();
     void deleteInvoiceItem(int id);
     

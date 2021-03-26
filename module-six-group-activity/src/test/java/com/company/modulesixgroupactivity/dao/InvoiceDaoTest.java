@@ -23,12 +23,19 @@ public class InvoiceDaoTest {
     private InvoiceDao invoiceDao;
     @Autowired
     private CustomerDao customerDao;
+    @Autowired
+    private InvoiceItemDao invoiceItemDao;
+    @Autowired
+    private ItemDao itemDao;
 
     @Before
     public void setUp() throws Exception {
+        invoiceItemDao.getAllInvoiceItems()
+                .forEach(x -> invoiceItemDao.deleteInvoiceItem(x.getInvoiceItemId()));
         invoiceDao.getAllInvoices()
                 .forEach(x -> invoiceDao.deleteInvoice(x.getInvoiceId()));
-
+        itemDao.getAllItems()
+                .forEach(x -> itemDao.deleteItem(x.getItemId()));
         customerDao.getAllCustomers()
                 .forEach(x -> customerDao.deleteCustomer(x.getCustomerId()));
     }
@@ -60,6 +67,10 @@ public class InvoiceDaoTest {
         List<Invoice> invoices = invoiceDao.getInvoicesByCustomer(customer);
 
         assertTrue(invoices.contains(invoice));
+
+        Invoice invoice2 = invoiceDao.getInvoice(invoice.getInvoiceId());
+
+        assertEquals(invoice, invoice2);
 
         invoiceDao.getInvoicesByCustomer(customer)
                 .forEach(x -> invoiceDao.deleteInvoice(x.getInvoiceId()));

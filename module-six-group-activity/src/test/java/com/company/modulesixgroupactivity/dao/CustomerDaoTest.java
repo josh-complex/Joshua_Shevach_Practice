@@ -17,10 +17,22 @@ import static org.junit.Assert.*;
 public class CustomerDaoTest {
 
     @Autowired
-    CustomerDao customerDao;
+    private InvoiceDao invoiceDao;
+    @Autowired
+    private CustomerDao customerDao;
+    @Autowired
+    private InvoiceItemDao invoiceItemDao;
+    @Autowired
+    private ItemDao itemDao;
 
     @Before
     public void setUp() throws Exception {
+        invoiceItemDao.getAllInvoiceItems()
+                .forEach(x -> invoiceItemDao.deleteInvoiceItem(x.getInvoiceItemId()));
+        invoiceDao.getAllInvoices()
+                .forEach(x -> invoiceDao.deleteInvoice(x.getInvoiceId()));
+        itemDao.getAllItems()
+                .forEach(x -> itemDao.deleteItem(x.getItemId()));
         customerDao.getAllCustomers()
                 .forEach(x -> customerDao.deleteCustomer(x.getCustomerId()));
     }
