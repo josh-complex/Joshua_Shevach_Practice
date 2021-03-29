@@ -49,9 +49,14 @@ public class ServiceTest {
         expectedCustomer.setCustomerId(1);
         expectedInvoiceViewModel.setCustomer(expectedCustomer);
 
-
-        InvoiceItem invoiceItem = new InvoiceItem();
-        invoiceItem.setInvoiceItemId(1);
+        InvoiceItem invoiceItem = new InvoiceItem(
+                1,
+                1,
+                1,
+                1,
+                new BigDecimal("1"),
+                new BigDecimal("0.00")
+        );
 
         List<InvoiceItem> expectedInvoiceItems = new ArrayList<>();
         expectedInvoiceItems.add(invoiceItem);
@@ -70,9 +75,6 @@ public class ServiceTest {
         Invoice inputInvoice = new Invoice();
         inputInvoice.setInvoiceId(1);
 
-        InvoiceItem inputInvoiceItem = new InvoiceItem();
-        inputInvoiceItem.setInvoiceItemId(inputInvoice.getInvoiceId());
-
         List<InvoiceItem> inputInvoiceItems = new ArrayList<>();
         inputInvoiceItems.add(invoiceItem);
         inputInvoiceViewModel.setItems(inputInvoiceItems);
@@ -80,8 +82,8 @@ public class ServiceTest {
         InvoiceViewModel resultOfSavingInput = service.saveInvoice(inputInvoiceViewModel);
 
         assertEquals(expectedInvoiceViewModel, resultOfSavingInput);
-
     }
+
     @Test
     public void shouldFindInvoice(){
         InvoiceViewModel expectedInvoiceViewModel = new InvoiceViewModel();
@@ -119,6 +121,47 @@ public class ServiceTest {
         assertEquals(expectedInvoiceViewModel,resultOfRetrievingInvoice);
     }
 
+    @Test
+    public void shouldFindAllInvoices() {
+        InvoiceViewModel expectedInvoiceViewModel = new InvoiceViewModel();
+        expectedInvoiceViewModel.setId(1);
+        expectedInvoiceViewModel.setOrderDate(LocalDate.of(2021, 02, 12));
+        expectedInvoiceViewModel.setPickupDate(LocalDate.of(2021, 02, 14));
+        expectedInvoiceViewModel.setReturnDate(LocalDate.of(2021, 02, 15));
+        expectedInvoiceViewModel.setLateFee(new BigDecimal("50.00"));
+
+        Customer expectedCustomer = new Customer(
+                1,
+                "Tiani",
+                "Edwards",
+                "tiani@heckyeah.com",
+                "Cognizant",
+                "8675309"
+        );
+        expectedInvoiceViewModel.setCustomer(expectedCustomer);
+
+        InvoiceItem invoiceItem = new InvoiceItem(
+                1,
+                1,
+                1,
+                1,
+                new BigDecimal("1"),
+                new BigDecimal("0.00")
+        );
+
+        List<InvoiceItem> expectedInvoiceItems = new ArrayList<InvoiceItem>(){{
+           add(invoiceItem);
+        }};
+        expectedInvoiceViewModel.setItems(expectedInvoiceItems);
+
+        List<InvoiceViewModel> expectedInvoiceViewModels = new ArrayList<InvoiceViewModel>(){{
+            add(expectedInvoiceViewModel);
+        }};
+
+        List<InvoiceViewModel> resultOfRetrievingInvoices = service.findAllInvoices();
+
+        assertEquals(expectedInvoiceViewModels, resultOfRetrievingInvoices);
+    }
 
     private void setUpInvoiceItemDaoMock() {
         invoiceItemDao = mock(InvoiceItemDaoJdbcTemplateImpl.class);
