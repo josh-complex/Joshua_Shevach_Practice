@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -20,6 +21,7 @@ public class Book {
 
     private int id;
     @NotNull
+    @Size(max = 15)
     private String isbn;
     @NotNull
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -29,6 +31,7 @@ public class Book {
     @NotNull
     private int authorId;
     @NotNull
+    @Size(max = 70)
     private String title;
     @NotNull
     private int publisherId;
