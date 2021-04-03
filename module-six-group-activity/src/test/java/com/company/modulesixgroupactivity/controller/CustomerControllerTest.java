@@ -38,7 +38,6 @@ public class CustomerControllerTest {
     @MockBean
     private Service service;
 
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -99,7 +98,7 @@ public class CustomerControllerTest {
     @Test
     public void shouldReturn422StatusCodeWithInvalidRequestBody() throws Exception {
 
-        customer2.setEmail("blahb");
+        customer2.setEmail("");
         inputJson = mapper.writeValueAsString(customer2);
 
         System.out.println(inputJson);

@@ -15,8 +15,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Item {
 
-    @NotEmpty
-    @Size(max = 11)
     private int itemId;
     @NotEmpty
     @Size(max = 50)

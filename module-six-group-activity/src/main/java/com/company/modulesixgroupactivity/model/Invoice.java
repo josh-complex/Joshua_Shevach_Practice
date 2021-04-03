@@ -18,11 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Invoice {
 
-    @Size(max = 11)
-    @NotEmpty
     private int invoiceId;
-    @Size(max = 11)
-    @NotEmpty
     private int customerId;
     @NotNull
     @JsonSerialize(using = LocalDateSerializer.class)

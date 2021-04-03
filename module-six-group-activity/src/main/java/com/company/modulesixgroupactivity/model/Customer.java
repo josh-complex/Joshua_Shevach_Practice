@@ -12,8 +12,6 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Customer {
 
-    @Size(max = 11)
-    @NotEmpty
     private int customerId;
     @Size(max = 50)
     @NotEmpty

@@ -13,17 +13,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class InvoiceItem {
 
-    @NotEmpty
-    @Size(max = 11)
     private int invoiceItemId;
-    @NotEmpty
-    @Size(max = 11)
     private int invoiceId;
-    @NotEmpty
-    @Size(max = 11)
     private int itemId;
-    @NotEmpty
-    @Size(max = 11)
     private int quantity;
     @NotNull
     @Digits(integer = 8, fraction = 2)
