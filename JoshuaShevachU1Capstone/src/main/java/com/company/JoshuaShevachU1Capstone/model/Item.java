@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
@@ -15,15 +12,20 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Item {
 
-    @NotNull
+    @NotNull(message = "Must supply an ID")
     protected int id;
-    @Size(max = 20)
+
+    @NotBlank(message = "Must supply an item type")
+    @Size(max = 20, message = "Item type must be 20 characters or less")
     protected String itemType;
-    @NotNull
-    @PositiveOrZero
+
+    @NotNull(message = "Must supply a remaining inventory")
+    @PositiveOrZero(message = "Remaining inventory cannot be negative")
     protected int remainingInventory;
-    @NotNull
-    @Digits(integer = 5, fraction = 2)
+
+    @NotNull(message = "Must supply a price")
+    @Positive(message = "Price must be a positive non-zero value")
+    @Digits(integer = 5, fraction = 2, message = "Value must be less than $99,999.99")
     protected BigDecimal price;
 
 }

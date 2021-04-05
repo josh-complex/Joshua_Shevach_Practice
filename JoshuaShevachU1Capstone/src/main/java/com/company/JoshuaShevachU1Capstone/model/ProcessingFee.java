@@ -14,11 +14,12 @@ import java.math.BigDecimal;
 @UniqueElements
 public class ProcessingFee {
 
-    @NotNull
+    @NotBlank(message = "Must supply a product type")
     @Size(max = 20)
     private String productType;
-    @NotNull
-    @Digits(integer = 4, fraction = 2)
+    @NotNull(message = "Must supply a fee")
+    @Positive(message = "Processing fee must be a positive non-zero value")
+    @Digits(integer = 5, fraction = 2, message = "Value must be less than $99,999.99")
     private BigDecimal fee;
 
 }

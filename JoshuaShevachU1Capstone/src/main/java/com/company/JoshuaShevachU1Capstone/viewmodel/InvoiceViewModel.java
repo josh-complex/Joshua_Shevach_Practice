@@ -8,10 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
@@ -19,39 +16,58 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class InvoiceViewModel {
 
-    @NotNull
+    @NotNull(message = "Must supply an ID")
     private int id;
-    @NotNull
-    @Size(max = 80)
+
+    @NotBlank(message = "Must supply a name")
+    @Size(max = 80, message = "Name must be 80 characters or less")
     private String name;
-    @NotNull
-    @Size(max = 30)
+
+    @NotBlank(message = "Must supply a street")
+    @Size(max = 30, message = "Street must be 30 characters or less")
     private String street;
-    @NotNull
-    @Size(max = 20)
+
+    @NotBlank(message = "Must supply a city")
+    @Size(max = 20, message = "City must be 20 characters or less")
     private String city;
-    @NotNull
-    @Size(max = 2)
+
+    @NotBlank(message = "Must supply a state")
+    @Size(min = 2, max = 2, message = "Must supply a valid 2-character state code")
     private String state;
-    @NotNull
-    @Size(max = 5)
+
+    @NotBlank(message = "Must supply a zipcode")
+    @Size(max = 5, message = "Must supply a valid 5-character zipcode")
     private String zipcode;
-    @Positive
+
+    @NotNull(message = "Must supply an quantity")
+    @Positive(message = "Requested quantity cannot be zero")
     private int quantity;
-    @NotNull
+
+    @Valid
+    @NotNull(message = "Must supply an item")
     private Item item;
-    @NotNull
+
+    @Valid
+    @NotNull(message = "Must supply a sales tax rate")
     private SalesTaxRate salesTaxRate;
-    @NotNull
+
+    @Valid
+    @NotNull(message = "Must supply a processing fee")
     private ProcessingFee processingFee;
-    @NotNull
-    @Digits(integer = 5, fraction = 2)
+
+    @NotNull(message = "Must supply a subtotal")
+    @Positive(message = "Subtotal must be a positive non-zero value")
+    @Digits(integer = 5, fraction = 2, message = "Value must be less than $99,999.99")
     private BigDecimal subtotal;
-    @NotNull
-    @Digits(integer = 5, fraction = 2)
+
+    @NotNull(message = "Must supply taxes and fees")
+    @Positive(message = "Taxes & fees must be a positive non-zero value")
+    @Digits(integer = 5, fraction = 2, message = "Value must be less than $99,999.99")
     private BigDecimal taxesAndFees;
-    @NotNull
-    @Digits(integer = 5, fraction = 2)
+
+    @NotNull(message = "Must supply a total")
+    @Positive(message = "Total must be a positive non-zero value")
+    @Digits(integer = 5, fraction = 2, message = "Value must be less than $99,999.99")
     private BigDecimal total;
 
 }

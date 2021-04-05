@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -187,23 +188,34 @@ public class GameStoreService {
         return vm;
     }
 
-
     public InvoiceViewModel addInvoice(Invoice invoice) {
         InvoiceViewModel vm = buildInvoiceViewModel(invoice);
 
         invoice.setUnitPrice(vm.getItem().getPrice());
         invoice.setSubtotal(vm.getSubtotal());
-        invoice.setTax(vm.getSubtotal().multiply(vm.getSalesTaxRate().getRate()));
+        invoice.setTax(vm.getSubtotal().multiply(vm.getSalesTaxRate().getRate()).setScale(2, RoundingMode.HALF_UP));
         invoice.setProcessingFee(
                 invoice.getQuantity() > 10
                         ? vm.getProcessingFee().getFee().add(new BigDecimal("15.49"))
                         : vm.getProcessingFee().getFee());
         invoice.setTotal(vm.getTotal());
-        invoice = invoiceDao.addInvoice(invoice);
 
-        invoice.setItemType(vm.getItem().getItemType());
+        invoice = invoiceDao.addInvoice(invoice);
         vm.setId(invoice.getId());
 
         return vm;
+    }
+
+    public InvoiceViewModel getInvoice(int id) {
+        return buildInvoiceViewModel(invoiceDao.getInvoice(id));
+    }
+
+    public List<InvoiceViewModel> getAllInvoices() {
+        List<InvoiceViewModel> vms = new ArrayList<>();
+        var invoices = invoiceDao.getAllInvoices();
+        invoices.forEach(x ->
+                vms.add(buildInvoiceViewModel(x))
+        );
+        return vms;
     }
 }

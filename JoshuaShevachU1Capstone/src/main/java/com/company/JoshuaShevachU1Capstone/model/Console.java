@@ -2,9 +2,7 @@ package com.company.JoshuaShevachU1Capstone.model;
 
 import lombok.*;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
@@ -14,15 +12,20 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Console extends Item {
 
-    @NotNull
-    @Size(max = 50)
+    @NotBlank(message = "Must supply a model")
+    @Size(max = 50, message = "Model must be 50 characters or less")
     private String model;
-    @NotNull
-    @Size(max = 50)
+
+    @NotBlank(message = "Must supply a manufacturer")
+    @Size(max = 50, message = "Manufacturer must be 50 characters or less")
     private String manufacturer;
-    @Size(max = 20)
+
+    @NotBlank(message = "Must supply a memory amount")
+    @Size(max = 20, message = "Memory amount must be 20 characters or less")
     private String memoryAmount;
-    @Size(max = 20)
+
+    @NotBlank(message = "Must supply a processor")
+    @Size(max = 20, message = "Processor must be 20 characters or less")
     private String processor;
 
     public Console(int id, String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {

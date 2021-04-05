@@ -33,7 +33,7 @@ public class ConsoleDaoJdbcImplTest {
         console.setManufacturer("Nintendo");
         console.setMemoryAmount("4 GB");
         console.setProcessor("Nvidia Tegra X1");
-        console.setItemType("console");
+        console.setItemType("Consoles");
         console.setPrice(new BigDecimal("299.00"));
         console.setRemainingInventory(1);
     }
