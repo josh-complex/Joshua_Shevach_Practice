@@ -30,7 +30,6 @@ public class TshirtDaoJdbcImplTest {
         tshirt.setSize("Medium");
         tshirt.setColor("White");
         tshirt.setDescription("Cool comfort fabrics");
-        tshirt.setItemType("T-Shirts");
         tshirt.setPrice(new BigDecimal("52.95"));
         tshirt.setRemainingInventory(32);
     }

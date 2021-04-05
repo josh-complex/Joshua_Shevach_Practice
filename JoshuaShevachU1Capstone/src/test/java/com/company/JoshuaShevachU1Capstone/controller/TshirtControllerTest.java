@@ -43,7 +43,6 @@ public class TshirtControllerTest {
         tshirt.setSize("Medium");
         tshirt.setColor("White");
         tshirt.setDescription("Cool comfort fabrics");
-        tshirt.setItemType("T-Shirts");
         tshirt.setPrice(new BigDecimal("52.95"));
         tshirt.setRemainingInventory(32);
     }
@@ -68,7 +67,6 @@ public class TshirtControllerTest {
         tshirt2.setSize("Medium");
         tshirt2.setColor("White");
         tshirt2.setDescription("Cool comfort fabrics");
-        tshirt2.setItemType("T-Shirts");
         tshirt2.setPrice(new BigDecimal("52.95"));
         tshirt2.setRemainingInventory(32);
 

@@ -15,10 +15,6 @@ public class Item {
     @NotNull(message = "Must supply an ID")
     protected int id;
 
-    @NotBlank(message = "Must supply an item type")
-    @Size(max = 20, message = "Item type must be 20 characters or less")
-    protected String itemType;
-
     @NotNull(message = "Must supply a remaining inventory")
     @PositiveOrZero(message = "Remaining inventory cannot be negative")
     protected int remainingInventory;

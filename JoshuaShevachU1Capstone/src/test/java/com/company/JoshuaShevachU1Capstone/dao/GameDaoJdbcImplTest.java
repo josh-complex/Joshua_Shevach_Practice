@@ -33,7 +33,6 @@ public class GameDaoJdbcImplTest {
         game.setEsrbRating("E for everyone");
         game.setDescription("Join Sora on his journey and experience interactions with various Disney, Square Enix and Pixar characters");
         game.setStudio("Square Enix");
-        game.setItemType("Games");
         game.setRemainingInventory(1);
         game.setPrice(new BigDecimal("59.99"));
     }

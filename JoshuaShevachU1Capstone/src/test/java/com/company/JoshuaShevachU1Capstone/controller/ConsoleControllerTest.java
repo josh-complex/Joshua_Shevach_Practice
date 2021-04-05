@@ -44,7 +44,6 @@ public class ConsoleControllerTest {
         console.setManufacturer("Nintendo");
         console.setMemoryAmount("4 GB");
         console.setProcessor("Nvidia Tegra X1");
-        console.setItemType("console");
         console.setPrice(new BigDecimal("299.00"));
         console.setRemainingInventory(1);
     }
@@ -77,7 +76,6 @@ public class ConsoleControllerTest {
         console2.setManufacturer("Nintendo");
         console2.setMemoryAmount("4 GB");
         console2.setProcessor("Nvidia Tegra X1");
-        console2.setItemType("console");
         console2.setPrice(new BigDecimal("299.00"));
         console2.setRemainingInventory(1);
 

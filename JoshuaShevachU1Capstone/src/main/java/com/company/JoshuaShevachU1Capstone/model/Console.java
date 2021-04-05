@@ -29,7 +29,7 @@ public class Console extends Item {
     private String processor;
 
     public Console(int id, String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
-        super(id, "Consoles", quantity, price);
+        super(id, quantity, price);
         this.model = model;
         this.manufacturer = manufacturer;
         this.memoryAmount = memoryAmount;

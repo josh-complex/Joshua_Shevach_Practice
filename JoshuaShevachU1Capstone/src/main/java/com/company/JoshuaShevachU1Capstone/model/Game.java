@@ -32,7 +32,7 @@ public class Game extends Item{
     private String studio;
 
     public Game(int id, String title, String esrbRating, String description, BigDecimal price, String studio, int quantity) {
-        super(id, "Games", quantity, price);
+        super(id, quantity, price);
         this.title = title;
         this.esrbRating = esrbRating;
         this.description = description;

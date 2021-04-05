@@ -9,6 +9,7 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -142,6 +143,7 @@ public class GameStoreService {
 
             case "t-shirts":
                 Tshirt tshirt = getTshirtById(invoice.getItemId());
+                if(tshirt == null) throw new NotFoundException("Please enter a valid t-shirt ID");
                 vm.setItem(tshirt);
                 if(tshirt.getRemainingInventory() >= invoice.getQuantity()) {
                     tshirt.setRemainingInventory(tshirt.getRemainingInventory() - invoice.getQuantity());
@@ -151,6 +153,7 @@ public class GameStoreService {
                 break;
             case "consoles":
                 Console console = getConsoleById(invoice.getItemId());
+                if(console == null) throw new NotFoundException("Please enter a valid console ID");
                 vm.setItem(console);
                 if(console.getRemainingInventory() >= invoice.getQuantity()) {
                     console.setRemainingInventory(console.getRemainingInventory() - invoice.getQuantity());
@@ -160,6 +163,7 @@ public class GameStoreService {
                 break;
             case "games":
                 Game game = getGameById(invoice.getItemId());
+                if(game == null) throw new NotFoundException("Please enter a valid game ID");
                 vm.setItem(game);
                 if(game.getRemainingInventory() >= invoice.getQuantity()) {
                     game.setRemainingInventory(game.getRemainingInventory() - invoice.getQuantity());
@@ -173,7 +177,7 @@ public class GameStoreService {
         }
 //endregion
 
-        vm.setProcessingFee(processingFeeDao.getProcessingFeeByProductType(vm.getItem().getItemType()));
+        vm.setProcessingFee(processingFeeDao.getProcessingFeeByProductType(invoice.getItemType()));
 
 //region Total, Taxes, Fees Calculations
         vm.setSubtotal(vm.getItem().getPrice().multiply(new BigDecimal(vm.getQuantity())));

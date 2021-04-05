@@ -45,7 +45,6 @@ public class GameStoreServiceTest {
         console.setManufacturer("Nintendo");
         console.setMemoryAmount("4 GB");
         console.setProcessor("Nvidia Tegra X1");
-        console.setItemType("Consoles");
         console.setPrice(new BigDecimal("299.00"));
         console.setRemainingInventory(5);
 
@@ -55,7 +54,6 @@ public class GameStoreServiceTest {
         testOutput.setManufacturer("Nintendo");
         testOutput.setMemoryAmount("4 GB");
         testOutput.setProcessor("Nvidia Tegra X1");
-        testOutput.setItemType("Consoles");
         testOutput.setPrice(new BigDecimal("299.00"));
         testOutput.setRemainingInventory(5);
 
@@ -79,7 +77,6 @@ public class GameStoreServiceTest {
         game.setEsrbRating("E for everyone");
         game.setDescription("Join Sora on his journey and experience interactions with various Disney, Square Enix and Pixar characters");
         game.setStudio("Square Enix");
-        game.setItemType("Games");
         game.setRemainingInventory(5);
         game.setPrice(new BigDecimal("59.99"));
 
@@ -89,7 +86,6 @@ public class GameStoreServiceTest {
         testOutput.setEsrbRating("E for everyone");
         testOutput.setDescription("Join Sora on his journey and experience interactions with various Disney, Square Enix and Pixar characters");
         testOutput.setStudio("Square Enix");
-        testOutput.setItemType("Games");
         testOutput.setRemainingInventory(5);
         testOutput.setPrice(new BigDecimal("59.99"));
 
@@ -114,7 +110,6 @@ public class GameStoreServiceTest {
         tshirt.setSize("Medium");
         tshirt.setColor("White");
         tshirt.setDescription("Cool comfort fabrics");
-        tshirt.setItemType("T-Shirts");
         tshirt.setPrice(new BigDecimal("52.95"));
         tshirt.setRemainingInventory(32);
 
@@ -123,7 +118,6 @@ public class GameStoreServiceTest {
         testOutput.setSize("Medium");
         testOutput.setColor("White");
         testOutput.setDescription("Cool comfort fabrics");
-        testOutput.setItemType("T-Shirts");
         testOutput.setPrice(new BigDecimal("52.95"));
         testOutput.setRemainingInventory(32);
 
@@ -239,7 +233,6 @@ public class GameStoreServiceTest {
         console.setManufacturer("Nintendo");
         console.setMemoryAmount("4 GB");
         console.setProcessor("Nvidia Tegra X1");
-        console.setItemType("Consoles");
         console.setPrice(new BigDecimal("299.00"));
         console.setRemainingInventory(5);
 
@@ -252,6 +245,11 @@ public class GameStoreServiceTest {
         assertEquals(1, expectedConsoles.size());
         assertEquals(1, expectedConsolesFromManufacturer.size());
 
+        service.updateConsole(console);
+        verify(consoleDao, times(1)).updateConsole(console);
+        service.deleteConsole(console.getId());
+        verify(consoleDao, times(1)).deleteConsole(console.getId());
+
     }
 
     @Test
@@ -262,7 +260,6 @@ public class GameStoreServiceTest {
         game.setEsrbRating("E for everyone");
         game.setDescription("Join Sora on his journey and experience interactions with various Disney, Square Enix and Pixar characters");
         game.setStudio("Square Enix");
-        game.setItemType("Games");
         game.setRemainingInventory(5);
         game.setPrice(new BigDecimal("59.99"));
 
@@ -279,6 +276,11 @@ public class GameStoreServiceTest {
         assertEquals(1, expectedGamesFromRating.size());
         assertEquals(1, expectedGamesFromStudio.size());
 
+        service.updateGame(game);
+        verify(gameDao, times(1)).updateGame(game);
+        service.deleteGame(game.getId());
+        verify(gameDao, times(1)).deleteGame(game.getId());
+
     }
 
     @Test
@@ -288,7 +290,6 @@ public class GameStoreServiceTest {
         tshirt.setSize("Medium");
         tshirt.setColor("White");
         tshirt.setDescription("Cool comfort fabrics");
-        tshirt.setItemType("T-Shirts");
         tshirt.setPrice(new BigDecimal("52.95"));
         tshirt.setRemainingInventory(32);
 
@@ -302,6 +303,11 @@ public class GameStoreServiceTest {
         assertEquals(1, expectedTshirts.size());
         assertEquals(1, expectedTshirtsFromSize.size());
         assertEquals(1, expectedTshirtsFromColor.size());
+
+        service.updateTshirt(tshirt);
+        verify(tshirtDao, times(1)).updateTshirt(tshirt);
+        service.deleteTshirt(tshirt.getId());
+        verify(tshirtDao, times(1)).deleteTshirt(tshirt.getId());
 
     }
 

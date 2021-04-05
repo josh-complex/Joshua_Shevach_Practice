@@ -43,15 +43,12 @@ public class InvoiceViewModel {
     @Positive(message = "Requested quantity cannot be zero")
     private int quantity;
 
-    @Valid
     @NotNull(message = "Must supply an item")
     private Item item;
 
-    @Valid
     @NotNull(message = "Must supply a sales tax rate")
     private SalesTaxRate salesTaxRate;
 
-    @Valid
     @NotNull(message = "Must supply a processing fee")
     private ProcessingFee processingFee;
 
@@ -69,5 +66,17 @@ public class InvoiceViewModel {
     @Positive(message = "Total must be a positive non-zero value")
     @Digits(integer = 5, fraction = 2, message = "Value must be less than $99,999.99")
     private BigDecimal total;
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public void setSalesTaxRate(SalesTaxRate salesTaxRate) {
+        this.salesTaxRate = salesTaxRate;
+    }
+
+    public void setProcessingFee(ProcessingFee processingFee) {
+        this.processingFee = processingFee;
+    }
 
 }

@@ -44,7 +44,6 @@ public class GameControllerTest {
         game.setEsrbRating("E for everyone");
         game.setDescription("Join Sora on his journey and experience interactions with various Disney, Square Enix and Pixar characters");
         game.setStudio("Square Enix");
-        game.setItemType("Games");
         game.setRemainingInventory(1);
         game.setPrice(new BigDecimal("59.99"));
     }
@@ -70,7 +69,6 @@ public class GameControllerTest {
         game2.setEsrbRating("E for everyone");
         game2.setDescription("Join Sora on his journey and experience interactions with various Disney, Square Enix and Pixar characters");
         game2.setStudio("Square Enix");
-        game2.setItemType("Games");
         game2.setRemainingInventory(1);
         game2.setPrice(new BigDecimal("59.99"));
 

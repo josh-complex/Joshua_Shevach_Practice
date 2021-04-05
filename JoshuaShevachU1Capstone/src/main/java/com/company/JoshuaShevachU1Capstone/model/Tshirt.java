@@ -28,7 +28,7 @@ public class Tshirt extends Item {
     private String description;
 
     public Tshirt(int id, String size, String color, String description, BigDecimal price, int quantity) {
-        super(id, "T-Shirts", quantity, price);
+        super(id, quantity, price);
         this.size = size;
         this.color = color;
         this.description = description;
