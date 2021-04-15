@@ -1,9 +1,11 @@
 package com.company;
 
+import com.company.interfaces.Converter;
+
 public class ConverterApplication {
 
     public static void main(String[] args) {
-        ConverterIf converterIf = new ConverterIf();
+        Converter converterIf = new ConverterIf();
         ConverterSwitch converterSwitch = new ConverterSwitch();
 
         System.out.println(converterIf.convertDay(6));
