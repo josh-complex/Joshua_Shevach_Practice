@@ -6,6 +6,7 @@ import com.company.booksystemservice.model.Book;
 import com.company.booksystemservice.viewmodel.BookViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,33 @@ public class BookService {
         this.dao = dao;
     }
 
-    public BookViewModel createBook(Book book) {
-        return buildBookViewModelFromBook(dao.createBook(book));
+    @Transactional
+    public BookViewModel createBook(BookViewModel book) {
+        Book bookFromDao = dao.createBook(buildBookFromBookViewModel(book));
+
+        if(book.getNoteEntries() != null) {
+            book.getNoteEntries().forEach(x -> {
+                x.setBookId(bookFromDao.getId());
+
+                if(x.getId() == null) {
+                    client.createNote(x);
+                } else {
+                    client.updateNote(x);
+                    client.getNote(x.getId());
+                }
+
+            });
+        }
+
+        return buildBookViewModelFromBook(bookFromDao);
     }
 
+    @Transactional
     public BookViewModel getBook(Integer id) {
         return buildBookViewModelFromBook(dao.getBook(id));
     }
 
+    @Transactional
     public List<BookViewModel> getAllBooks() {
         List<BookViewModel> vms = new ArrayList<>();
         List<Book> books = dao.getAllBooks();
@@ -39,8 +59,9 @@ public class BookService {
         return vms;
     }
 
-    public void updateBook(Book book) {
-        dao.updateBook(book);
+    @Transactional
+    public void updateBook(BookViewModel book) {
+        dao.updateBook(buildBookFromBookViewModel(book));
     }
 
     public void deleteBook(Integer id) {
@@ -53,6 +74,14 @@ public class BookService {
                 book.getTitle(),
                 book.getAuthor(),
                 client.getNotes(book.getId())
+        );
+    }
+
+    public Book buildBookFromBookViewModel(BookViewModel vm) {
+        return new Book(
+                vm.getId(),
+                vm.getTitle(),
+                vm.getAuthor()
         );
     }
 

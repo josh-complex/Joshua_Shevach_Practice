@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@FeignClient(name = "note-service")
+@FeignClient(name = "note-service-settings")
 public interface NoteClient {
 
     @PostMapping("/note")

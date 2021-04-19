@@ -1,6 +1,5 @@
 package com.company.booksystemservice.controller;
 
-import com.company.booksystemservice.model.Book;
 import com.company.booksystemservice.service.BookService;
 import com.company.booksystemservice.viewmodel.BookViewModel;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -30,28 +29,32 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BookViewModel createBook(@RequestBody Book book) {
-        return null;
+    public BookViewModel createBook(@RequestBody BookViewModel book) {
+        return service.createBook(book);
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public BookViewModel getBook(@PathVariable Integer id) {
-        return null;
+        return service.getBook(id);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<BookViewModel> getAllBooks() {
-        return null;
+        return service.getAllBooks();
     }
 
     @PutMapping
-    public void updateBook(Book book) {
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateBook(BookViewModel book) {
+        service.updateBook(book);
     }
 
-    @DeleteMapping
-    public void deleteBook(Integer id) {
-
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBook(@PathVariable Integer id) {
+        service.deleteBook(id);
     }
 
 }

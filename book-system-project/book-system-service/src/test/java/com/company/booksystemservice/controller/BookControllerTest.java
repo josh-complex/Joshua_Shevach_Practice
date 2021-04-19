@@ -1,6 +1,5 @@
 package com.company.booksystemservice.controller;
 
-import com.company.booksystemservice.model.Book;
 import com.company.booksystemservice.service.BookService;
 import com.company.booksystemservice.util.messages.NoteEntry;
 import com.company.booksystemservice.viewmodel.BookViewModel;
@@ -8,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -37,12 +37,15 @@ public class BookControllerTest {
     @MockBean
     private BookService service;
 
+    @MockBean
+    private RabbitTemplate template;
+
     private final ObjectMapper mapper = new ObjectMapper();
 
-    Book inputBook1 = new Book();
+    BookViewModel inputBook1 = new BookViewModel();
     BookViewModel outputBook1 = new BookViewModel();
 
-    Book inputBook2 = new Book();
+    BookViewModel inputBook2 = new BookViewModel();
     BookViewModel outputBook2 = new BookViewModel();
 
     NoteEntry inputNoteEntry1 = new NoteEntry();
@@ -86,6 +89,7 @@ public class BookControllerTest {
 
         inputBook1.setAuthor("George R.R. Martin");
         inputBook1.setTitle("Song of Ice and Fire");
+        inputBook1.setNoteEntries(noteEntries);
         outputBook1.setId(1);
         outputBook1.setAuthor("George R.R. Martin");
         outputBook1.setTitle("Song of Ice and Fire");
@@ -93,6 +97,7 @@ public class BookControllerTest {
 
         inputBook2.setAuthor("J.k. Rowling");
         inputBook2.setTitle("Fantastic Beast and Where to Find Them");
+        inputBook2.setNoteEntries(noteEntries);
         outputBook2.setId(2);
         outputBook2.setAuthor("J.k. Rowling");
         outputBook2.setTitle("Fantastic Beast and Where to Find Them");
@@ -112,11 +117,55 @@ public class BookControllerTest {
         String outputJson = mapper.writeValueAsString(outputBook1);
 
         mvc.perform(post("/book")
-        .content(inputJson)
-        .contentType(MediaType.APPLICATION_JSON))
+                .content(inputJson)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(outputJson));
+    }
+
+    @Test
+    public void shouldGetBookByIdAndReturnBookViewModel() throws Exception {
+        String outputJson = mapper.writeValueAsString(outputBook1);
+
+        mvc.perform(get("/book/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(outputJson));
+    }
+
+    @Test
+    public void shouldGetAllBooksAndReturnListOfBookViewModels() throws Exception {
+        String outputJson = mapper.writeValueAsString(books);
+
+        mvc.perform(get("/book"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(outputJson));
+    }
+
+    @Test
+    public void shouldUpdateBookAndCallTheUpdateBookServiceMethod1Time() throws Exception {
+        String inputJson = mapper.writeValueAsString(inputBook1);
+
+        mvc.perform(put("/book")
+                .content(inputJson)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(service, times(1)).updateBook(any(BookViewModel.class));
+
+    }
+
+    @Test
+    public void shouldDeleteBookAndCallTheDeleteBookServiceMethod1Time() throws Exception {
+        mvc.perform(delete("/book/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(service, times(1)).deleteBook(1);
     }
 
 }
