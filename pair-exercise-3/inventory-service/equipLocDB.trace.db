@@ -1,0 +1,30 @@
+2021-04-19 15:24:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE IF EXISTS EQUIPMENT-[*]LOCATION CASCADE "; SQL statement:
+drop table if exists equipment-location CASCADE  [42000-200]
+2021-04-19 15:24:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE EQUIPMENT-[*]LOCATION (ID INTEGER NOT NULL, DESCRIPTION VARCHAR(40), LOCATION VARCHAR(40), PRIMARY KEY (ID))"; SQL statement:
+create table equipment-location (id integer not null, description varchar(40), location varchar(40), primary key (id)) [42000-200]
+2021-04-19 15:57:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EQUIPMENT" not found; SQL statement:
+insert into equipment-location (description, location, id) values (?, ?, ?) [42102-200]
+2021-04-19 15:58:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EQUIPMENT" not found; SQL statement:
+insert into equipment-location (description, location, id) values (?, ?, ?) [42102-200]
+2021-04-19 15:59:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE IF EXISTS EQUIPMENT-[*]LOCATION CASCADE "; SQL statement:
+drop table if exists equipment-location CASCADE  [42000-200]
+2021-04-19 15:59:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE EQUIPMENT-[*]LOCATION (ID INTEGER NOT NULL, DESCRIPTION VARCHAR(40), LOCATION VARCHAR(40), PRIMARY KEY (ID))"; SQL statement:
+create table equipment-location (id integer not null, description varchar(40), location varchar(40), primary key (id)) [42000-200]
+2021-04-19 16:00:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EQUIPMENT" not found; SQL statement:
+insert into equipment-location (description, location, id) values (?, ?, ?) [42102-200]
+2021-04-19 16:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE IF EXISTS EQUIPMENT-[*]LOCATION CASCADE "; SQL statement:
+drop table if exists equipment-location CASCADE  [42000-200]
+2021-04-19 16:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE EQUIPMENT-[*]LOCATION (ID INTEGER NOT NULL, DESCRIPTION VARCHAR(40), LOCATION VARCHAR(40), PRIMARY KEY (ID))"; SQL statement:
+create table equipment-location (id integer not null, description varchar(40), location varchar(40), primary key (id)) [42000-200]
+2021-04-19 16:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EQUIPMENT" not found; SQL statement:
+insert into equipment-location (description, location, id) values (?, ?, ?) [42102-200]
