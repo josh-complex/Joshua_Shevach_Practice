@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: post-service
+  config:
+    import: configserver:http://localhost:1999
