@@ -1,2 +1,4 @@
-package com.trilogyed.stwitterservice.model;public class Post {
+package com.trilogyed.stwitterservice.model;
+
+public class Post {
 }

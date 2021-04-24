@@ -1,5 +1,7 @@
 spring:
   application:
-    name: post-service-test
+    name: comment-queue-consumer
   config:
     import: configserver:http://localhost:1999
+
+

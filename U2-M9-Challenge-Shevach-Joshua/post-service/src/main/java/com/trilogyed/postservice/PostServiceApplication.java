@@ -1,4 +1,4 @@
-package com.trilogyed.post;
+package com.trilogyed.postservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

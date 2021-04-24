@@ -1,2 +1,4 @@
-package com.trilogyed.stwitterservice.viewmodel;public class PostViewModel {
+package com.trilogyed.stwitterservice.viewmodel;
+
+public class PostViewModel {
 }

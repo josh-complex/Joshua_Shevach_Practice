@@ -1,6 +1,6 @@
-package com.trilogyed.comment.controller;
+package com.trilogyed.postservice.controller;
 
-import com.trilogyed.comment.model.CustomErrorResponse;
+import com.trilogyed.postservice.model.CustomErrorResponse;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

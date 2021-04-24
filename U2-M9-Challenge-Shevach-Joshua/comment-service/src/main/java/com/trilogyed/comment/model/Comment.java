@@ -41,11 +41,11 @@ public class Comment {
     private LocalDate createDate;
 
     @NotBlank(message = "Must supply a commenter name")
-    @Size(max = 50, message = "Commenter name must not be grater than 50 characters")
+    @Size(max = 50, message = "Commenter name must not be greater than 50 characters")
     private String commenterName;
 
     @NotBlank(message = "Must supply a comment")
-    @Size(max = 255, message = "Comment must not be grater than 255 characters")
+    @Size(max = 255, message = "Comment must not be greater than 255 characters")
     private String comment;
 
 }

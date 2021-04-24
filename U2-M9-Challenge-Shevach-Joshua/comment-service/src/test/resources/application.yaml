@@ -1,5 +1,5 @@
 spring:
   application:
-    name: comment-service
+    name: comment-service-test
   config:
     import: configserver:http://localhost:1999
