@@ -1,4 +1,4 @@
-package com.trilogyed.comment.model;
+package com.trilogyed.postservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

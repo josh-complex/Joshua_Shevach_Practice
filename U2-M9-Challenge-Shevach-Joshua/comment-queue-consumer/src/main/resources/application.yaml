@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: comment-queue-consumer
+  config:
+    import: configserver:http://localhost:1999
+
+
