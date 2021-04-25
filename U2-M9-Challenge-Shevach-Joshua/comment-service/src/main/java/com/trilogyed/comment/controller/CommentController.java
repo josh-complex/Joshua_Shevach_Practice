@@ -42,6 +42,7 @@ public class CommentController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Comment> getComments(@RequestParam(required = false) Integer postId) {
+        System.out.println("getting comments");
         if(postId != null) return repo.findAllByPostId(postId);
         return repo.findAll();
     }

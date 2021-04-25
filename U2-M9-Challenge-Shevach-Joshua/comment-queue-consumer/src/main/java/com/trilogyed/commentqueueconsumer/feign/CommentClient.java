@@ -1,6 +1,6 @@
 package com.trilogyed.commentqueueconsumer.feign;
 
-import com.trilogyed.commentqueueconsumer.util.messages.CommentEntry;
+import com.trilogyed.commentqueueconsumer.util.messages.Comment;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +14,6 @@ public interface CommentClient {
 
     @PostMapping("/comment")
     @ResponseStatus(HttpStatus.CREATED)
-    public CommentEntry createComment(@RequestBody @Valid CommentEntry comment);
+    public Comment createComment(@RequestBody @Valid Comment comment);
 
 }
