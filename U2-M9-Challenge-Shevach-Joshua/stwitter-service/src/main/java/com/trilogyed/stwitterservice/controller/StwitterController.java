@@ -1,5 +1,6 @@
 package com.trilogyed.stwitterservice.controller;
 
+import com.trilogyed.stwitterservice.model.Comment;
 import com.trilogyed.stwitterservice.model.Post;
 import com.trilogyed.stwitterservice.service.StwitterService;
 import com.trilogyed.stwitterservice.viewmodel.PostViewModel;
@@ -44,8 +45,20 @@ public class StwitterController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PostViewModel updatePost(@RequestBody PostViewModel postViewModel, @PathVariable Integer id) {
-        return service.updatePost(postViewModel, id);
+    public PostViewModel updatePost(@RequestBody PostViewModel postViewModel) {
+        return service.updatePost(postViewModel);
+    }
+
+    @PutMapping("/comment")
+    @ResponseStatus(HttpStatus.OK)
+    public PostViewModel updateComment(@RequestBody Comment comment) {
+        return service.updateComment(comment);
+    }
+
+    @DeleteMapping("/comment/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public PostViewModel deleteComment(@PathVariable Integer id) {
+        return service.deleteComment(id);
     }
 
     @DeleteMapping("/{id}")

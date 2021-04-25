@@ -16,9 +16,16 @@ public class MessageListener {
         this.client = client;
     }
 
-    @RabbitListener(queues = CommentQueueConsumerApplication.QUEUE_NAME)
-    public void receiveMessage(Comment msg) {
-        client.createComment(msg);
+    @RabbitListener(queues = CommentQueueConsumerApplication.CREATE_QUEUE)
+    public void receiveCreateMessage(Comment comment) {
+        client.createComment(comment);
     }
+/*
+    @RabbitListener(queues = CommentQueueConsumerApplication.UPDATE_QUEUE)
+    public void receiveUpdateMessage(Comment comment) {
+        client.updateComment(comment, comment.getCommentId());
+    }*/
 
+    @RabbitListener(queues = CommentQueueConsumerApplication.DELETE_QUEUE)
+    public void receiveMessage(Integer id) { client.deleteComment(id); }
 }

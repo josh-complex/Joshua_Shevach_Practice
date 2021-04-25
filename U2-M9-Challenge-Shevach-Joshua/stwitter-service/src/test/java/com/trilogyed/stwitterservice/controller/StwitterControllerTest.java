@@ -125,7 +125,7 @@ public class StwitterControllerTest {
         when(service.findPostById(1)).thenReturn(outputPost1);
         when(service.findPosts()).thenReturn(outputPosts);
         when(service.findPosts("Josh")).thenReturn(outputPosts);
-        when(service.updatePost(updatePost, 1)).thenReturn(updatePost);
+        when(service.updatePost(updatePost)).thenReturn(updatePost);
 
     }
 
@@ -187,7 +187,7 @@ public class StwitterControllerTest {
         String input = mapper.writeValueAsString(updatePost);
         String output = mapper.writeValueAsString(updatePost);
 
-        mvc.perform(put("/stwitter/1")
+        mvc.perform(put("/stwitter")
                 .content(input)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

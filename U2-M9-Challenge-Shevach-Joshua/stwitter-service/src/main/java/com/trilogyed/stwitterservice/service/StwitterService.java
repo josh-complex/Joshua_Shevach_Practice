@@ -5,6 +5,7 @@ import com.trilogyed.stwitterservice.feign.PostClient;
 import com.trilogyed.stwitterservice.model.Comment;
 import com.trilogyed.stwitterservice.model.Post;
 import com.trilogyed.stwitterservice.viewmodel.PostViewModel;
+import lombok.var;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,10 @@ import java.util.List;
 @Service
 public class StwitterService {
 
-    public static final String TOPIC_EXCHANGE_NAME = "comment-exchange";
-    public static final String ROUTING_KEY = "comment.create.stwitter.service";
+    final String TOPIC_EXCHANGE_NAME = "comment-exchange";
+    final String CREATE_ROUTE = "comment.create.stwitter.service";
+    final String DELETE_ROUTE = "comment.delete.stwitter.service";
+    final String UPDATE_ROUTE = "comment.update.stwitter.service";
 
     final RabbitTemplate commentTemplate;
     PostClient postClient;
@@ -35,7 +38,7 @@ public class StwitterService {
         );
 
         postViewModel.getComments().forEach(x -> x.setPostId(post.getPostId()));
-        postViewModel.getComments().forEach(x -> commentTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, ROUTING_KEY, x));
+        postViewModel.getComments().forEach(x -> commentTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, CREATE_ROUTE, x));
 
         return buildPostViewModelFromPostAndComment(post, commentClient.getComments(post.getPostId()));
     }
@@ -56,8 +59,16 @@ public class StwitterService {
         return null;
     }
 
-    public PostViewModel updatePost(PostViewModel updatePost, Integer id) {
+    public PostViewModel updatePost(PostViewModel updatePost) {
         return null;
+    }
+
+    public PostViewModel updateComment(Comment updateComment) {
+        commentTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, UPDATE_ROUTE, updateComment);
+        return buildPostViewModelFromPostAndComment(
+                postClient.getPostById(updateComment.getCommentId()),
+                commentClient.getComments(updateComment.getPostId())
+        );
     }
 
     public void deletePost(Integer id) {
@@ -79,6 +90,16 @@ public class StwitterService {
                 postViewModel.getPostDate(),
                 postViewModel.getPosterName(),
                 postViewModel.getPost()
+        );
+    }
+
+    public PostViewModel deleteComment(Integer id) {
+        var post = postClient.getPostById(commentClient.getCommentById(id).getPostId());
+
+        commentTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, DELETE_ROUTE, id);
+        return buildPostViewModelFromPostAndComment(
+                post,
+                commentClient.getComments(post.getPostId())
         );
     }
 }
