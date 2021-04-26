@@ -11,57 +11,64 @@ import org.springframework.context.annotation.Bean;
 @EnableFeignClients
 public class CommentQueueConsumerApplication {
 
-    public static final String TOPIC_EXCHANGE_NAME = "comment-exchange";
-    public static final String CREATE_QUEUE = "create-comment-queue";
-    public static final String DELETE_QUEUE = "delete-comment-queue";
-    public static final String UPDATE_QUEUE = "update-comment-queue";
-    public static final String CREATE_ROUTE = "comment.create.#";
-    public static final String DELETE_ROUTE = "comment.delete.#";
-    public static final String UPDATE_ROUTE = "comment.update.#";
+    public static final String COMMENT_EXCHANGE = "comment-exchange";
+    public static final String POST_EXCHANGE = "post-exchange";
+    public static final String CREATE_COMMENT_QUEUE = "create-comment-queue";
+    public static final String DELETE_COMMENT_QUEUE = "delete-comment-queue";
+    public static final String UPDATE_COMMENT_QUEUE = "update-comment-queue";
+    public static final String CREATE_COMMENT_ROUTE = "comment.create.#";
+    public static final String DELETE_COMMENT_ROUTE = "comment.delete.#";
+    public static final String UPDATE_COMMENT_ROUTE = "comment.update.#";
+    public static final String DELETE_POST_QUEUE = "delete-post-queue";
+    public static final String UPDATE_POST_QUEUE = "update-post-queue";
+    public static final String DELETE_POST_ROUTE = "post.delete.#";
+    public static final String UPDATE_POST_ROUTE = "post.update.#";
 
-    /*@Bean
-    Queue queue() {
-        return new Queue(QUEUE_NAME, false);
-    }
-
-    @Bean
-    TopicExchange exchange() {
-        return new TopicExchange(TOPIC_EXCHANGE_NAME);
-    }
-*/
     @Bean
     public Declarables topicBindings() {
-        Queue createQueue = new Queue(CREATE_QUEUE, false);
-        Queue deleteQueue = new Queue(DELETE_QUEUE, false);
-        Queue updateQueue = new Queue(UPDATE_QUEUE, false);
+        Queue createCommentQueue = new Queue(CREATE_COMMENT_QUEUE, false);
+        Queue deleteCommentQueue = new Queue(DELETE_COMMENT_QUEUE, false);
+        Queue updateCommentQueue = new Queue(UPDATE_COMMENT_QUEUE, false);
+        Queue deletePostQueue = new Queue(DELETE_POST_QUEUE, false);
+        Queue updatePostQueue = new Queue(UPDATE_POST_QUEUE, false);
 
-        TopicExchange topicExchange = new TopicExchange(TOPIC_EXCHANGE_NAME);
+        TopicExchange commentExchange = new TopicExchange(COMMENT_EXCHANGE);
+        TopicExchange postExchange = new TopicExchange(POST_EXCHANGE);
 
         return new Declarables(
-                createQueue,
-                deleteQueue,
-                updateQueue,
-                topicExchange,
+                createCommentQueue,
+                deleteCommentQueue,
+                updateCommentQueue,
+                deletePostQueue,
+                updatePostQueue,
+                commentExchange,
+                postExchange,
+
+                //Comment bindings
                 BindingBuilder
-                        .bind(createQueue)
-                        .to(topicExchange)
-                        .with(CREATE_ROUTE),
+                        .bind(createCommentQueue)
+                        .to(commentExchange)
+                        .with(CREATE_COMMENT_ROUTE),
                 BindingBuilder
-                        .bind(deleteQueue)
-                        .to(topicExchange)
-                        .with(DELETE_ROUTE),
+                        .bind(deleteCommentQueue)
+                        .to(commentExchange)
+                        .with(DELETE_COMMENT_ROUTE),
                 BindingBuilder
-                        .bind(updateQueue)
-                        .to(topicExchange)
-                        .with(UPDATE_ROUTE)
+                        .bind(updateCommentQueue)
+                        .to(commentExchange)
+                        .with(UPDATE_COMMENT_ROUTE),
+
+                //Post bindings
+                BindingBuilder
+                        .bind(deletePostQueue)
+                        .to(postExchange)
+                        .with(DELETE_POST_ROUTE),
+                BindingBuilder
+                        .bind(updatePostQueue)
+                        .to(postExchange)
+                        .with(UPDATE_POST_ROUTE)
         );
     }
-
-	/*@Bean
-	Binding binding(Queue queue, TopicExchange exchange) {
-		BindingBuilder builder = new BindingBuilder();
-		return BindingBuilder.bind(queue).to(exchange).with(CREATE_ROUTE);
-	}*/
 
     @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {

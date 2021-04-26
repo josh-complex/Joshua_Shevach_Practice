@@ -45,11 +45,10 @@ public class PostController {
         return repo.findAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public Post updatePost(@RequestBody @Valid Post post, @PathVariable Integer id) {
-        Post lazyPost = repo.getOne(id);
-        post.setPostId(lazyPost.getPostId());
+    public Post updatePost(@RequestBody @Valid Post post) {
+        repo.getOne(post.getPostId());
         return repo.save(post);
     }
 

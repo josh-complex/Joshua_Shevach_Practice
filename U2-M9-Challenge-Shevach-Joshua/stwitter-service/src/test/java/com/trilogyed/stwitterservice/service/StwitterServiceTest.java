@@ -149,7 +149,6 @@ public class StwitterServiceTest {
         when(postClient.getPostById(1)).thenReturn(outputPost1);
         when(postClient.getPostById(2)).thenReturn(outputPost2);
         when(postClient.getPosts(null)).thenReturn(outputPosts);
-        when(postClient.updatePost(updatePost, 1)).thenReturn(updatePost);
 
         when(commentClient.getComments(1)).thenReturn(outputComments);
     }

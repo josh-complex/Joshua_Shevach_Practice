@@ -5,21 +5,20 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @FeignClient("comment-service")
+@RequestMapping("/comment")
 public interface CommentClient {
 
-    @PostMapping("/comment")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Comment createComment(@RequestBody Comment comment);
+    Comment createComment(@RequestBody Comment comment);
 
-    @PutMapping("/{id}")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public Comment updateComment(@RequestBody Comment comment, @PathVariable Integer id);
+    Comment updateComment(@RequestBody Comment comment);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteComment(@PathVariable Integer id);
+    void deleteComment(@PathVariable Integer id);
 
 }

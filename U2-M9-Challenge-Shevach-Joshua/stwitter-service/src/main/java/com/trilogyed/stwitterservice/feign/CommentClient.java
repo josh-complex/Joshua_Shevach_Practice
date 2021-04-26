@@ -20,12 +20,4 @@ public interface CommentClient {
     @ResponseStatus(HttpStatus.OK)
     List<Comment> getComments(@RequestParam(required = false) Integer postId);
 
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    Comment updateComment(@RequestBody @Valid Comment comment, @PathVariable Integer id);
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    void deleteComment(@PathVariable Integer id);
-
 }

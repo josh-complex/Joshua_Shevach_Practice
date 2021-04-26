@@ -28,9 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(StwitterController.class)
+@WebMvcTest(StwitterPostController.class)
 @ImportAutoConfiguration(RefreshAutoConfiguration.class)
-public class StwitterControllerTest {
+public class StwitterPostControllerTest {
 
     @Autowired
     MockMvc mvc;
@@ -123,7 +123,7 @@ public class StwitterControllerTest {
 
         when(service.createPost(inputPost1)).thenReturn(outputPost1);
         when(service.findPostById(1)).thenReturn(outputPost1);
-        when(service.findPosts()).thenReturn(outputPosts);
+        when(service.findPosts(null)).thenReturn(outputPosts);
         when(service.findPosts("Josh")).thenReturn(outputPosts);
         when(service.updatePost(updatePost)).thenReturn(updatePost);
 
@@ -135,7 +135,7 @@ public class StwitterControllerTest {
         String input = mapper.writeValueAsString(inputPost1);
         String output = mapper.writeValueAsString(outputPost1);
 
-        mvc.perform(post("/stwitter")
+        mvc.perform(post("/stwitter/post")
                 .content(input)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -149,7 +149,7 @@ public class StwitterControllerTest {
 
         String output = mapper.writeValueAsString(outputPost1);
 
-        mvc.perform(get("/stwitter/1"))
+        mvc.perform(get("/stwitter/post/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(output));
@@ -161,7 +161,7 @@ public class StwitterControllerTest {
 
         String output = mapper.writeValueAsString(outputPosts);
 
-        mvc.perform(get("/stwitter"))
+        mvc.perform(get("/stwitter/post"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(output));
@@ -173,7 +173,7 @@ public class StwitterControllerTest {
 
         String output = mapper.writeValueAsString(outputPosts);
 
-        mvc.perform(get("/stwitter")
+        mvc.perform(get("/stwitter/post")
                 .param("posterName", "Josh"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -187,7 +187,7 @@ public class StwitterControllerTest {
         String input = mapper.writeValueAsString(updatePost);
         String output = mapper.writeValueAsString(updatePost);
 
-        mvc.perform(put("/stwitter")
+        mvc.perform(put("/stwitter/post")
                 .content(input)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

@@ -6,7 +6,6 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -42,16 +41,14 @@ public class CommentController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Comment> getComments(@RequestParam(required = false) Integer postId) {
-        System.out.println("getting comments");
         if(postId != null) return repo.findAllByPostId(postId);
         return repo.findAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public Comment updateComment(@RequestBody @Valid Comment comment, @PathVariable Integer id) {
-        Comment lazyComment = repo.getOne(id);
-        comment.setCommentId(lazyComment.getCommentId());
+    public Comment updateComment(@RequestBody @Valid Comment comment) {
+        repo.getOne(comment.getCommentId());
         return repo.save(comment);
     }
 

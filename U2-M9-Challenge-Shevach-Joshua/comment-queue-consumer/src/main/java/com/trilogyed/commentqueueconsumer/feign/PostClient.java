@@ -1,14 +1,13 @@
-package com.trilogyed.stwitterservice.feign;
+package com.trilogyed.commentqueueconsumer.feign;
 
-import com.trilogyed.stwitterservice.model.Post;
+import com.trilogyed.commentqueueconsumer.util.messages.Post;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
-@FeignClient(name = "post-service")
+@FeignClient("post-service")
 @RequestMapping("/post")
 public interface PostClient {
 
@@ -16,12 +15,12 @@ public interface PostClient {
     @ResponseStatus(HttpStatus.CREATED)
     Post createPost(@RequestBody Post post);
 
-    @GetMapping("/{id}")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    Post getPostById(@PathVariable Integer id);
+    Post updatePost(@RequestBody Post post);
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    List<Post> getPosts(@RequestParam(required = false) String posterName);
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    void deletePost(@PathVariable Integer id);
 
 }
