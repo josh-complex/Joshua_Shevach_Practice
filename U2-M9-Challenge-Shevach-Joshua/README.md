@@ -7,3 +7,6 @@ Configuration locations [can be found here](https://github.com/BentAllenDesign/U
 **Comment service port:** 6868  
 **Comment queue port:** 3861  
 **Stwitter service port:** 8889
+
+## Notes  
+Updating comments must use a comment with both a postId and commentId 
