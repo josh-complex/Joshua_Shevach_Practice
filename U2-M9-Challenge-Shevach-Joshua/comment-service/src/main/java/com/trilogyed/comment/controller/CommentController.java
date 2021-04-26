@@ -4,6 +4,10 @@ import com.trilogyed.comment.model.Comment;
 import com.trilogyed.comment.repo.CommentRepo;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +19,7 @@ import java.util.List;
 @RestController
 @RefreshScope
 @RequestMapping("/comment")
+@CacheConfig(cacheNames = {"comment"})
 public class CommentController {
 
     private final CommentRepo repo;
@@ -24,12 +29,15 @@ public class CommentController {
         this.repo = repo;
     }
 
+    @CachePut(key = "#result.getCommentId()")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Comment createComment(@RequestBody @Valid Comment comment) {
         return repo.save(comment);
     }
 
+
+    @Cacheable
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Comment getCommentById(@PathVariable Integer id) {
@@ -45,6 +53,7 @@ public class CommentController {
         return repo.findAll();
     }
 
+    @CacheEvict(key = "#comment.getCommentId()")
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public Comment updateComment(@RequestBody @Valid Comment comment) {
@@ -52,6 +61,7 @@ public class CommentController {
         return repo.save(comment);
     }
 
+    @CacheEvict
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteComment(@PathVariable Integer id) {

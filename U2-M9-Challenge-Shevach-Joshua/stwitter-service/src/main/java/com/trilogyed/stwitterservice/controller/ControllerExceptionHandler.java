@@ -2,18 +2,16 @@ package com.trilogyed.stwitterservice.controller;
 
 import com.trilogyed.stwitterservice.exception.NotFoundException;
 import com.trilogyed.stwitterservice.model.CustomErrorResponse;
+import feign.FeignException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +46,7 @@ public class ControllerExceptionHandler {
         );
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(value = {NotFoundException.class, FeignException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<CustomErrorResponse> notFoundException(Exception e) {
         return new ResponseEntity<>(new CustomErrorResponse(

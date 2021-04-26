@@ -96,17 +96,17 @@ public class StwitterService {
     since we'd build the page elements using the post view model information
      */
     @Transactional
-    public PostViewModel createComment(Comment comment, Integer postId) {
-        var post = postClient.getPostById(postId);
-        if (post == null) throw new NotFoundException("Could not find post with an id of '" + postId + "'");
+    public PostViewModel createComment(Comment comment) {
+        var post = postClient.getPostById(comment.getPostId());
+        if (post == null) throw new NotFoundException("Could not find post with an id of '" + comment.getPostId() + "'");
 
-        comment.setPostId(postId);
+        comment.setPostId(comment.getPostId());
 
         rabbitTemplate.convertAndSend(COMMENT_EXCHANGE, CREATE_COMMENT_ROUTE, comment);
 
         return buildPostViewModelFromPostAndComment(
                 post,
-                commentClient.getComments(postId)
+                commentClient.getComments(comment.getPostId())
         );
     }
 
@@ -115,9 +115,13 @@ public class StwitterService {
         if (commentClient.getCommentById(updateComment.getCommentId()) == null)
             throw new NotFoundException("Could not find comment with an id of '" + updateComment.getCommentId() + "'");
 
+        var post = postClient.getPostById(updateComment.getPostId());
+        if (post == null)
+            throw new NotFoundException("Could not find post with an id of '" + updateComment.getPostId() + "'");
+
         rabbitTemplate.convertAndSend(COMMENT_EXCHANGE, UPDATE_COMMENT_ROUTE, updateComment);
         return buildPostViewModelFromPostAndComment(
-                postClient.getPostById(updateComment.getCommentId()),
+                post,
                 commentClient.getComments(updateComment.getPostId())
         );
     }

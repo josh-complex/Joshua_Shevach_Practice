@@ -23,10 +23,10 @@ public class StwitterCommentController {
         this.service = service;
     }
 
-    @PostMapping("/{postId}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PostViewModel createComment(@RequestBody @Valid Comment comment, @PathVariable Integer postId) {
-        return service.createComment(comment, postId);
+    public PostViewModel createComment(@RequestBody @Valid Comment comment) {
+        return service.createComment(comment);
     }
 
     @PutMapping
