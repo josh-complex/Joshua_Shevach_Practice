@@ -1,5 +1,5 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/game_store?useSSL=false&serverTimezone=US/Eastern&allowPublicKeyRetrieval=true
-    username: root
-    password: rootroot
+  application:
+    name: game-store-service
+  config:
+    import: configserver:http://config-server:1999

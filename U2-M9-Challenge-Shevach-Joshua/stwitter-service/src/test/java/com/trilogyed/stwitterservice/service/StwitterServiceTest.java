@@ -9,7 +9,6 @@ import lombok.var;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,16 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class StwitterServiceTest {
-
-    public static final String TOPIC_EXCHANGE_NAME = "comment-exchange";
-    public static final String ROUTING_KEY = "comment.create.stwitter.service";
 
     @Autowired
     StwitterService service;
@@ -55,6 +49,7 @@ public class StwitterServiceTest {
 
     List<Post> inputPosts = new ArrayList<>();
     List<Post> outputPosts = new ArrayList<>();
+    List<PostViewModel> outputPostViewModels = new ArrayList<>();
 
     Comment inputComment1 = new Comment();
     Comment outputComment1 = new Comment();
@@ -121,7 +116,7 @@ public class StwitterServiceTest {
         inputPostViewModel2.setPosterName("Josh");
         inputPostViewModel2.setPostDate(LocalDate.of(2020, 6, 29));
         inputPostViewModel2.setPost("Hey, now I'm making a post without any comments!!");
-        inputPostViewModel2.setComments(null);
+        inputPostViewModel2.setComments(new ArrayList<>());
 
         inputPost2.setPosterName("Josh");
         inputPost2.setPostDate(LocalDate.of(2020, 6, 29));
@@ -131,7 +126,10 @@ public class StwitterServiceTest {
         outputPostViewModel2.setPosterName("Josh");
         outputPostViewModel2.setPostDate(LocalDate.of(2020, 6, 29));
         outputPostViewModel2.setPost("Hey, now I'm making a post without any comments!!");
-        outputPostViewModel2.setComments(null);
+        outputPostViewModel2.setComments(new ArrayList<>());
+
+        outputPostViewModels.add(outputPostViewModel1);
+        outputPostViewModels.add(outputPostViewModel2);
 
         outputPost2.setPostId(2);
         outputPost2.setPosterName("Josh");
@@ -143,8 +141,6 @@ public class StwitterServiceTest {
         outputPosts.add(outputPost1);
         outputPosts.add(outputPost2);
 
-        //service = new StwitterService(commentTemplate, postClient);
-
         when(postClient.createPost(inputPost1)).thenReturn(outputPost1);
         when(postClient.getPostById(1)).thenReturn(outputPost1);
         when(postClient.getPostById(2)).thenReturn(outputPost2);
@@ -155,11 +151,23 @@ public class StwitterServiceTest {
 
     @Test
     public void shouldCreatePostAndReturnPostViewModelAfterSendingCommentsOffToQueue() {
-
         var postViewModelGottenFromService = service.createPost(inputPostViewModel1);
 
         assertEquals(outputPostViewModel1, postViewModelGottenFromService);
+    }
 
+    @Test
+    public void shouldGetPostByIdAndReturnPostViewModel() {
+        var postViewModelGottenFromService = service.findPostById(1);
+
+        assertEquals(outputPostViewModel1, postViewModelGottenFromService);
+    }
+
+    @Test
+    public void shouldGetAllPostsWhenNotGivenAPosterNameAndReturnListOfPostViewModels() {
+        var postViewModelsGottenFromService = service.findPosts(null);
+
+        assertEquals(outputPostViewModels, postViewModelsGottenFromService);
     }
 
 }

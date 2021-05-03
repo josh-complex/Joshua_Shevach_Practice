@@ -44,7 +44,6 @@ public class StwitterCommentControllerTest {
     ObjectMapper mapper = new ObjectMapper();
 
     PostViewModel outputPost1 = new PostViewModel();
-
     PostViewModel outputPost2 = new PostViewModel();
 
     Comment updateComment = new Comment();
