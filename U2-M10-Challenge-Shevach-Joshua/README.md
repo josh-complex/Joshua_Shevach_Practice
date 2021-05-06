@@ -46,4 +46,3 @@ The project was updated to use JPA repositories, register with a Eureka server i
 		* `POST /invoices`
 		* `GET /invoices ADMIN`
 		* `GET /invoices/{id} MANAGER`
-* The eureka server is running on
