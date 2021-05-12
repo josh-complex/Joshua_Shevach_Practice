@@ -48,6 +48,28 @@ function getItemTypeId({itemType}) {
   }
 }
 
+function displayDeletePrompt(ev) {
+  let targetParent = document.querySelector(`#${ev.target.id}`).parentElement.firstElementChild;
+  let data = JSON.parse(targetParent.getAttribute("data-item"));
+  let id = data[getItemTypeId(data)];
+
+  let main = document.querySelector("#delete-modal-content");
+
+  let title = main.querySelector("#delete-modal-title");
+  title.innerHTML = `Delete ${data.name}`;
+
+  let body = main.querySelector("#delete-modal-body");
+  body.innerHTML = 
+  `
+  Are you sure?
+  `;
+
+  let submitButton = main.querySelector(".btn-danger");
+  submitButton.addEventListener('click', () => {
+    api.deleteGame(id);
+  });
+}
+
 function displayUpdatePrompt(ev) {
   let targetParent = document.getElementById(ev.target.id).parentElement.firstElementChild;
   let data = JSON.parse(targetParent.getAttribute("data-item"));
@@ -72,25 +94,28 @@ function displayUpdatePrompt(ev) {
     form.innerHTML = form.innerHTML.concat(
       `
       <div class="mb-3">
-        <label for="${htmlId}" class="form-label">
+        <label for="${htmlId}-${x}" class="form-label">
           <strong>
             ${(x.charAt(0).toUpperCase() + x.slice(1)).replace(/([A-Z])/g, ' $1').trim()}
           </strong>
         </label>
-        <input type="text" class="form-control" id="${htmlId}-${x}" value="${data[x]}">
+        <input 
+          type="text" 
+          class="form-control" 
+          id="${htmlId}-${x}" 
+          value="${data[x]}" 
+          ${x === "itemType" || x === "image" || x === `${getItemTypeId(data)}` ? 'disabled' : ''}>
       </div>
       `
-    ));
+  ));
 
   let submitButton = main.querySelector(".btn-primary");
   submitButton.addEventListener('click', () => {
     let updateData = {};
     Object.getOwnPropertyNames(data).forEach(x => {
-      console.log(x);
       updateData[x] = main.querySelector(`#${htmlId}-${x}`).value;
     })
     api.updateGame(updateData);
-    setTimeout(render(), 1000);
   });
 }
 
@@ -113,9 +138,7 @@ function renderInventoryContent(state) {
       for(let j = 0; j < 4; j++) {
         let current = data[(i*4) + j];
         if(current) {
-          console.log(current);
           let currentName = current.name.toLowerCase().replace(/\s/g, "-");
-          console.log(currentName);
           let currentDomId = `${current.itemType.toLowerCase()}-${(i*4) + j}`;
           rowDom.innerHTML = rowDom.innerHTML.concat(
             `
@@ -157,14 +180,31 @@ function renderInventoryContent(state) {
                             Loading...
                           </div>
                           <div class="modal-footer" id="update-modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nevermind</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><strong style="pointer-events: none;">Nevermind</strong></button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><strong style="pointer-events: none;">UPDATE</strong></button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <a id="update-${currentDomId}" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#update-modal">UPDATE</a>
-                    <a id="delete-${currentDomId}" class="btn btn-danger delete-button">DELETE</a>
+                    <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-modal-title" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                        <div class="modal-content" id="delete-modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="delete-modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body" id="delete-modal-body">
+                            Loading...
+                          </div>
+                          <div class="modal-footer" id="delete-modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><strong style="pointer-events: none;">Nevermind</strong></button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><strong style="pointer-events: none;">DELETE</strong></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <a id="update-${currentDomId}" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#update-modal"><strong style="pointer-events: none;">UPDATE</strong></a>
+                    <a id="delete-${currentDomId}" class="btn btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#delete-modal"><strong style="pointer-events: none;">DELETE</strong></a>
                   </div>
                 </div>
               </div>
@@ -176,8 +216,12 @@ function renderInventoryContent(state) {
     }
 
     const updateButtons = document.querySelectorAll(".update-button");
-    //updateButtons.forEach(x => console.log(x));
     updateButtons.forEach(x => x.addEventListener("click", displayUpdatePrompt));
+
+    const deleteButtons = document.querySelectorAll(".delete-button");
+    deleteButtons.forEach(x => { 
+      x.addEventListener("click", displayDeletePrompt);
+    });
 
     return htmlInsert;
   }

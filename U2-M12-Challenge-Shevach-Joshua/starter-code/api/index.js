@@ -40,7 +40,9 @@ const api = {
   },
 
   async deleteGame(id) {
-    const response = await fetch(`http://localhost:8080/games/${id}`)
+    const response = await fetch(`http://localhost:8080/games/${id}`, {
+      method: "DELETE",
+    });
   }
 };
 

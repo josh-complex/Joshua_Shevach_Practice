@@ -88,6 +88,60 @@
                       </ul>
                     </div>
                   </div>
+                  <div class="card filter" id="create-new">
+                    <div class="modal fade" id="create-game-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="create-game-modal-title" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                        <div class="modal-content" id="create-game-modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="create-game-modal-title">Create Game</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body" id="create-game-modal-body">
+                            <form id="create-game-form">
+                              <div class="mb-3">
+                                <label for="create-name-input" class="form-label"><strong>Name</strong></label>
+                                <input type="text" class="form-control" id="create-name-input" placeholder="Enter Name">
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-title-input" class="form-label"><strong>Title</strong></label>
+                                <input type="text" class="form-control" id="create-title-input" placeholder="Enter Title">
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-description-input" class="form-label"><strong>Description</strong></label>
+                                <input type="text" class="form-control" id="create-description-input" placeholder="Enter Description">
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-studio-input" class="form-label"><strong>Studio</strong></label>
+                                <input type="text" class="form-control" id="create-studio-input" placeholder="Enter Studio">
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-rating-input" class="form-label"><strong>Rating</strong></label>
+                                <input type="text" class="form-control" id="create-rating-input" placeholder="Enter ESRB Rating">
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-price-input" class="form-label"><strong>Price</strong></label>
+                                <input type="text" class="form-control" id="create-price-input" placeholder="Enter Price">
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-quantity-input" class="form-label"><strong>Quantity</strong></label>
+                                <input type="text" class="form-control" id="create-quantity-input" placeholder="Enter Quantity">
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer" id="create-game-modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><strong style="pointer-events: none;">Nevermind</strong></button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><strong style="pointer-events: none;">CREATE</strong></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "card-header">Create</div>
+                    <div class = "card-body p-0">
+                      <ul class = "filter-list my-0 p-0">
+                        <button class="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#create-game-modal"><strong>NEW GAME</strong></button>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="item-grid-container my-2">
