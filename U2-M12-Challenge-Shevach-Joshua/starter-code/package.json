@@ -1,0 +1,37 @@
+{
+  "name": "2u-java-module-html-css-js-capstone",
+  "version": "1.1.0",
+  "private": true,
+  "description": "A capstone project for Game Store",
+  "main": "index.js",
+  "scripts": {
+    "start": " browser-sync start --port 4198 --server --files '**/*.html, **/*.css, **/*.js'"
+  },
+  "keywords": [
+    "html-css-js",
+    "student"
+  ],
+  "author": "Manav Misra",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.26.13",
+    "eslint": "^7.19.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "stylelint": "^13.9.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-twbs-bootstrap": "^2.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.css": "stylelint --fix",
+    "*.{js,css,md}": "prettier --write"
+  }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+          crossorigin="anonymous" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One:regular" 
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+
+    <title>GameStore</title>
+  </head>
+  
+  <body>
+    <header>
+      <nav role="navigation" class="navbar navbar-expand-lg bg-transparent shadow-sm">
+        <div class="container">
+          <h1 class="pt-2" style="font-family: 'Fjalla One', sans-serif;">
+            <a href="#">
+              Game<span class="text-danger">Store</span> 
+            </a>
+          </h1>
+        </div>
+      </nav>
+    </header>
+
+    <main id="root" class="root container">
+      <div class="row">
+        <div class="col">
+          <ol class="breadcrumb p-2"></ol>
+        </div>
+      </div>
+      <div class="row">
+        <div class="tab-content col-12">
+          <div class="tab-pane active" >
+            <div class="row align-items-start">
+              <div class="filter-bar">
+                <div class="filters">
+                  <div class="card filter" id="available-now-filter">
+                    <div class = "card-header">Availability</div>
+                    <div class = "card-body p-0">
+                      <ul class = "filter-list my-0 p-0">
+                        <li class="col-sm-4 col-md-12">
+                          <a href="" id="availability-filter-option"><i style="pointer-events: none;" class="bi bi-check-circle availability-filter-option-icon "></i>  In Stock</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card filter" id="item-type-filter">
+                    <div class = "card-header">Item Type</div>
+                    <div class = "card-body p-0">
+                      <ul class = "filter-list my-0 p-0">
+                        <li class="col-sm-4 col-md-12">
+                          <a href="" class="item-type-filter-option" data-type="Games"><i style="pointer-events: none;" class="bi bi-check-circle item-type-filter-option-icon "></i>  Games</a>
+                        </li>
+                        <li class="col-sm-4 col-md-12">
+                          <a href="" class="item-type-filter-option" data-type="Consoles"><i style="pointer-events: none;" class="bi bi-check-circle item-type-filter-option-icon"></i>  Consoles</a>
+                        </li>
+                        <li class="col-sm-4 col-md-12">
+                          <a href="" class="item-type-filter-option" data-type="T-shirts"><i style="pointer-events: none;" class="bi bi-check-circle item-type-filter-option-icon"></i>  T-Shirts</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card filter" id="price-filter">
+                    <div class = "card-header">Price</div>
+                    <div class = "card-body p-0">
+                      <ul class = "filter-list my-0 p-0">
+                        <li class="col-sm-4 col-md-12">
+                          <label for="min-price-filter" class="form-label"><strong>Min:</strong></label>
+                          <input id="min-price-filter" class="form-control price-filter-minmax-values" data-type="min" type="number" step="1" min="0.01" max="99999" value="0">
+                        </li>
+                        <li class="col-sm-4 col-md-12">
+                          <label for="max-price-filter" class="form-label"><strong>Max:</strong></label>
+                          <input id="max-price-filter" class="form-control price-filter-minmax-values" data-type="max" type="number" step="1" min="0.01" max="99999" value="99999">
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item-grid-container my-2">
+                <div class="row item-grid" id="item-grid"> 
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container-fluid bg-dark text-light py-3">
+      <div class="container">
+        &copy; 2021 GameStore&reg;&trade;
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
+            crossorigin="anonymous"></script>
+
+    <script src="./index.js" type="module"></script>
+  </body>
+</html>

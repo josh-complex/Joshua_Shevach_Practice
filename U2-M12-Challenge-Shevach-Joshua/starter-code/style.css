@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400, 600, 700, 900&subset=latin-ext");
+
+@media (min-width: 576px) {
+  .root {
+    position: relative;
+  }
+  .container {
+    max-width: 767px;
+  }
+  .filter-bar {
+    display: block;
+  }
+  .item-card-container {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1023px;
+  }
+  .item-grid-container {
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%;
+  }
+  .filter-bar {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1279px;
+  }
+  .item-grid-container {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+  .item-card-container {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+.container {
+  width: 100%;
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.filter-bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-bottom: 20px;
+  overflow: auto;
+  font-size: .75rem;
+}
+
+.filter-bar .filters {
+  background-color: #fff;
+  border-bottom: none;
+}
+
+table {
+  display: block;
+}
+
+.table{
+  display: block;
+  width: 100%;
+}
+
+.filters .card {
+  border: none;
+}
+
+.filters .card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 0 16px;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 19px;
+  color: #282828;
+  text-transform: capitalize;
+  background: transparent;
+  border-top: 1px solid #d2d2d2;
+  border-bottom: 0;
+  border-radius: 0;
+}
+
+.filter {
+  margin-bottom: 0;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  text-align: left;
+
+  /* background-color: #f2f4f7; */
+}
+
+h1 a {
+  color: #000;
+  text-decoration: none;
+}
+
+.item-grid-container {
+  position: relative;
+  width: 100%;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.item-grid {
+  padding-top: 18px;
+  border-top: 1px solid #d9d9d9;
+}
+
+.item-card-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.item-card-container {
+  transition: box-shadow .15s;
+}
+
+.item-card-container .item-card {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.item-card-container:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div {
+  display: block;
+}
+
+.card {
+  display: block;
+  margin: 12px;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.filter-list li a {
+  font-size: 18px;
+  color: grey;
+  text-decoration: none;
+}
+
+.filter-list li {
+  padding-bottom: 12px;
+}
+
+dl,
+ol,
+ul {
+  margin-top: 0;
+}
+
+ul {
+  display: block;
+  list-style-type: none;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 25px;
+}
+
+.card p {
+  margin-bottom: 8px;
+}
+
+.card p:not(:first-of-type, :nth-of-type(2)) {
+  padding: 0;
+  margin: 2px;
+  font-size: small;
+  font-style: italic;
+}
+
+.card p:last-of-type {
+  margin-bottom: 8px;
+}
+
+.card-body a {
+  width: 70%;
+  margin-bottom: 8px;
+}
+
+a:hover {
+  color:#000;
+}
