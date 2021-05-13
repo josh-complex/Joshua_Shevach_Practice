@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/t-shirts")
 @RefreshScope
+@CrossOrigin(origins = "*")
 public class TshirtController {
 
     GameStoreService service;

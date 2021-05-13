@@ -51,7 +51,6 @@ public class GameStoreServiceTest {
     private Invoice inputInvoice;
     private final List<Invoice> outputInvoices = new ArrayList<>();
 
-
     @Before
     public void setUp() {
         setUpConsoleDaoMock();

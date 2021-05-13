@@ -1,6 +1,6 @@
 package com.company.gamestoreservice.controller;
 
-import com.company.gamestoreservice.SecurityConfig;
+//import com.company.gamestoreservice.SecurityConfig;
 import com.company.gamestoreservice.model.Console;
 import com.company.gamestoreservice.service.GameStoreService;
 import com.fasterxml.jackson.databind.ObjectMapper;

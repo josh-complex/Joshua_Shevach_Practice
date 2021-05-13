@@ -1,9 +1,11 @@
 const api = {
   async indexAll(
-    games = "http://localhost:8080/games",
-    consoles = "http://localhost:8080/consoles",
-    //tShirts = "http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/t-shirts"
-    tShirts = "http://localhost:8080/t-shirts"
+    //games = "http://localhost:8080/games", //<~~ for testing
+    games = "http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/games", //<~~ for prod
+    //consoles = "http://localhost:8080/consoles", //<~~ for testing
+    consoles = "http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/consoles", //<~~ for prod
+    //tShirts = "http://localhost:8080/t-shirts" //<~~ for testing
+    tShirts = "http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/t-shirts" //<~~ for prod
   ) {
     let gamesRes;
     let consolesRes;
@@ -25,9 +27,11 @@ const api = {
       return gameArr.concat(consoleArr, tShirtArr);
     } else return "Could not find users";
   },
+};
 
+export const gameApi = {
   async updateGame(data) {
-    const response = await fetch(`http://localhost:8080/games`, {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/games`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -40,10 +44,23 @@ const api = {
   },
 
   async deleteGame(id) {
-    const response = await fetch(`http://localhost:8080/games/${id}`, {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/games/${id}`, {
       method: "DELETE",
     });
+  },
+
+  async createGame(data) {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/games`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    let responseText = await response.text();
+    console.log(responseText);
+    return responseText;
   }
-};
+}
 
 export default api;

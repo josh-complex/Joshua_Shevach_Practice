@@ -99,38 +99,46 @@
                           <div class="modal-body" id="create-game-modal-body">
                             <form id="create-game-form">
                               <div class="mb-3">
+                                <label for="create-item-type-input" class="form-label"><strong>Item Type</strong></label>
+                                <input data-property="itemType" type="text" class="form-control" id="create-item-type-input" value="Games" disabled>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-image-input" class="form-label"><strong>Name</strong></label>
+                                <input data-property="image" type="text" class="form-control" id="create-image-input" value="https://source.unsplash.com/random/200x250" disabled>
+                              </div>
+                              <div class="mb-3">
                                 <label for="create-name-input" class="form-label"><strong>Name</strong></label>
-                                <input type="text" class="form-control" id="create-name-input" placeholder="Enter Name">
+                                <input data-property="name" type="text" class="form-control" id="create-name-input" placeholder="Enter Name" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-title-input" class="form-label"><strong>Title</strong></label>
-                                <input type="text" class="form-control" id="create-title-input" placeholder="Enter Title">
+                                <input data-property="title" type="text" class="form-control" id="create-title-input" placeholder="Enter Title" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-description-input" class="form-label"><strong>Description</strong></label>
-                                <input type="text" class="form-control" id="create-description-input" placeholder="Enter Description">
+                                <input data-property="description" type="text" class="form-control" id="create-description-input" placeholder="Enter Description" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-studio-input" class="form-label"><strong>Studio</strong></label>
-                                <input type="text" class="form-control" id="create-studio-input" placeholder="Enter Studio">
+                                <input data-property="studio" type="text" class="form-control" id="create-studio-input" placeholder="Enter Studio" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-rating-input" class="form-label"><strong>Rating</strong></label>
-                                <input type="text" class="form-control" id="create-rating-input" placeholder="Enter ESRB Rating">
+                                <input data-property="esrbRating" type="text" class="form-control" id="create-rating-input" placeholder="Enter ESRB Rating" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-price-input" class="form-label"><strong>Price</strong></label>
-                                <input type="text" class="form-control" id="create-price-input" placeholder="Enter Price">
+                                <input data-property="price" type="number" class="form-control" id="create-price-input" placeholder="Enter Price" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-quantity-input" class="form-label"><strong>Quantity</strong></label>
-                                <input type="text" class="form-control" id="create-quantity-input" placeholder="Enter Quantity">
+                                <input data-property="quantity" type="number" class="form-control" id="create-quantity-input" placeholder="Enter Quantity" required>
                               </div>
                             </form>
                           </div>
                           <div class="modal-footer" id="create-game-modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><strong style="pointer-events: none;">Nevermind</strong></button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><strong style="pointer-events: none;">CREATE</strong></button>
+                            <button type="button" form="create-game-form" class="btn btn-primary create-button" data-bs-dismiss="modal"><strong style="pointer-events: none;">CREATE</strong></button>
                           </div>
                         </div>
                       </div>

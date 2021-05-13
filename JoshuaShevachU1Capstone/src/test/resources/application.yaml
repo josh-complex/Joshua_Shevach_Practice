@@ -1,5 +1,5 @@
 spring:
   application:
-    name: game-store-service
+    name: game-store-test
   config:
     import: configserver:http://localhost:1999

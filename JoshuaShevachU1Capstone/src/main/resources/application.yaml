@@ -1,5 +1,7 @@
 spring:
   application:
-    name: game-store-service
+    #name: game-store-test # <~~ USE FOR TESTING
+    name: game-store-service # <~~ USE FOR PRODUCTION
   config:
-    import: configserver:http://config-server:1999
+    #import: configserver:http://localhost:1999 # <~~ USE FOR TESTING
+    import: configserver:http://config-server:1999 # <~~ USE FOR PRODUCTION

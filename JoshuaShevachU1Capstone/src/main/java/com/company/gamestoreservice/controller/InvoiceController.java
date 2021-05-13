@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/invoices")
 @RefreshScope
+@CrossOrigin(origins = "*")
 public class InvoiceController {
 
     GameStoreService service;

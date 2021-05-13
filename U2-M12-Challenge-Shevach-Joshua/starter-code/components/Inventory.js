@@ -1,4 +1,4 @@
-import api from "../api/index.js";
+import { gameApi } from "../api/index.js";
 import render from "../index.js";
 
 const importantProperties = ["studio", "esrbRating", "manufacturer", "size", "color", "description"]
@@ -7,23 +7,19 @@ function renderInventoryRows({ data }) {
   if(data.length) {
     let rowCount = data.length % 4 === 0 ? data.length/4 : Math.ceil(data.length/4);
     let htmlInsert = ``;
-    //console.log(rowCount);
     for(let i = 0; i < rowCount; i++) {
-      //console.log(i);
       htmlInsert = htmlInsert.concat(
         `
         <div class="item-card-row" id="item-grid-row-${i}"></div>
         `
       );
     }
-    //console.log(htmlInsert);
     return htmlInsert;
   }
 }
 
 function getImportantPropertyValues(data) {
   let htmlInsert = "";
-  //console.log(data);
   let props = Object.getOwnPropertyNames(data);
   props.forEach( x => {
     if(importantProperties.includes(x)) {
@@ -66,7 +62,7 @@ function displayDeletePrompt(ev) {
 
   let submitButton = main.querySelector(".btn-danger");
   submitButton.addEventListener('click', () => {
-    api.deleteGame(id);
+    gameApi.deleteGame(id);
   });
 }
 
@@ -115,7 +111,10 @@ function displayUpdatePrompt(ev) {
     Object.getOwnPropertyNames(data).forEach(x => {
       updateData[x] = main.querySelector(`#${htmlId}-${x}`).value;
     })
-    api.updateGame(updateData);
+    gameApi.updateGame(updateData);
+    setTimeout(() => {
+      location.reload();
+    }, 500);
   });
 }
 
@@ -129,6 +128,7 @@ function renderInventoryContent(state) {
       data = data.filter(x => state.itemTypeFilter.includes(x.itemType));
     let pricefilter = state.priceFilter;
     data = data.filter(x => x.price > pricefilter.min && x.price < pricefilter.max);
+
 
     let htmlInsert = "";
     let rowCount = data.length % 4 === 0 ? data.length/4 : Math.ceil(data.length/4);

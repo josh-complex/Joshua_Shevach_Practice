@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/consoles")
 @RefreshScope
+@CrossOrigin(origins = "*")
 public class ConsoleController {
 
     GameStoreService service;

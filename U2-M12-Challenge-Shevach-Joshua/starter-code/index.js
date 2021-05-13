@@ -1,5 +1,5 @@
 import * as Inventory from "./components/Inventory.js";
-import api from "./api/index.js";
+import api, { gameApi } from "./api/index.js";
 
 const heading = document.querySelector("h1");
 heading.style.fontFamily = "Fjalla One, sans-serif";
@@ -16,6 +16,25 @@ const state = {
     max: 99999
   }
 };
+
+document.querySelector(".create-button").addEventListener('click', (event) => {
+  event.preventDefault();
+
+  console.log("creating");
+
+  let game = {}
+  document.getElementById("create-game-form").querySelectorAll(":scope > div > input").forEach( x => {
+    game[x.getAttribute("data-property")] = x.value;
+  });
+
+  gameApi.createGame(game);
+
+  event.stopPropagation();
+
+  setTimeout(() => {
+    location.reload();
+  }, 500);
+});
 
 let initialized = false;
 
@@ -82,11 +101,9 @@ function render() {
 
 
     grid.innerHTML = "";
-
     grid.innerHTML = grid.innerHTML.concat(
       Inventory.renderInventoryRows(state)
     );
-
     Inventory.renderInventoryContent(state);
   
   } else { grid.innerHTML = "No inventory to display" };
@@ -94,7 +111,6 @@ function render() {
 
 (async () => {
   state.data = await api.indexAll();
-  console.log(state.data);
   render();
 })();
 

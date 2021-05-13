@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/games")
 @RefreshScope
+@CrossOrigin(origins = "http://localhost:4198")
 public class GameController {
 
     GameStoreService service;
@@ -59,6 +60,7 @@ public class GameController {
     }
 
     @PutMapping
+    @CrossOrigin(origins = "http://localhost:4198")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateGame(@Valid @RequestBody Game game) {
         service.saveGame(game);
