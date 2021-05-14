@@ -100,45 +100,99 @@
                             <form id="create-game-form">
                               <div class="mb-3">
                                 <label for="create-item-type-input" class="form-label"><strong>Item Type</strong></label>
-                                <input data-property="itemType" type="text" class="form-control" id="create-item-type-input" value="Games" disabled>
+                                <input data-property="itemType" type="text" class="form-control" id="create-game-item-type-input" value="Games" disabled>
                               </div>
                               <div class="mb-3">
                                 <label for="create-image-input" class="form-label"><strong>Name</strong></label>
-                                <input data-property="image" type="text" class="form-control" id="create-image-input" value="https://source.unsplash.com/random/200x250" disabled>
+                                <input data-property="image" type="text" class="form-control" id="create-game-image-input" value="https://source.unsplash.com/random/200x250" disabled>
                               </div>
                               <div class="mb-3">
                                 <label for="create-name-input" class="form-label"><strong>Name</strong></label>
-                                <input data-property="name" type="text" class="form-control" id="create-name-input" placeholder="Enter Name" required>
+                                <input data-property="name" type="text" class="form-control" id="create-game-name-input" placeholder="Enter Name" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-title-input" class="form-label"><strong>Title</strong></label>
-                                <input data-property="title" type="text" class="form-control" id="create-title-input" placeholder="Enter Title" required>
+                                <input data-property="title" type="text" class="form-control" id="create-game-title-input" placeholder="Enter Title" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-description-input" class="form-label"><strong>Description</strong></label>
-                                <input data-property="description" type="text" class="form-control" id="create-description-input" placeholder="Enter Description" required>
+                                <input data-property="description" type="text" class="form-control" id="create-game-description-input" placeholder="Enter Description" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-studio-input" class="form-label"><strong>Studio</strong></label>
-                                <input data-property="studio" type="text" class="form-control" id="create-studio-input" placeholder="Enter Studio" required>
+                                <input data-property="studio" type="text" class="form-control" id="create-game-studio-input" placeholder="Enter Studio" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-rating-input" class="form-label"><strong>Rating</strong></label>
-                                <input data-property="esrbRating" type="text" class="form-control" id="create-rating-input" placeholder="Enter ESRB Rating" required>
+                                <input data-property="esrbRating" type="text" class="form-control" id="create-game-rating-input" placeholder="Enter ESRB Rating" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-price-input" class="form-label"><strong>Price</strong></label>
-                                <input data-property="price" type="number" class="form-control" id="create-price-input" placeholder="Enter Price" required>
+                                <input data-property="price" type="number" class="form-control" id="create-game-price-input" placeholder="Enter Price" required>
                               </div>
                               <div class="mb-3">
                                 <label for="create-quantity-input" class="form-label"><strong>Quantity</strong></label>
-                                <input data-property="quantity" type="number" class="form-control" id="create-quantity-input" placeholder="Enter Quantity" required>
+                                <input data-property="quantity" type="number" class="form-control" id="create-game-quantity-input" placeholder="Enter Quantity" required>
                               </div>
                             </form>
                           </div>
                           <div class="modal-footer" id="create-game-modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><strong style="pointer-events: none;">Nevermind</strong></button>
-                            <button type="button" form="create-game-form" class="btn btn-primary create-button" data-bs-dismiss="modal"><strong style="pointer-events: none;">CREATE</strong></button>
+                            <button type="button" form="create-game-form" class="btn btn-primary create-game-button" data-bs-dismiss="modal"><strong style="pointer-events: none;">CREATE</strong></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal fade" id="create-console-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="create-game-modal-title" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                        <div class="modal-content" id="create-console-modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="create-console-modal-title">Create Game</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body" id="create-console-modal-body">
+                            <form id="create-console-form">
+                              <div class="mb-3">
+                                <label for="create-item-type-input" class="form-label"><strong>Item Type</strong></label>
+                                <input data-property="itemType" type="text" class="form-control" id="create-console-item-type-input" value="Consoles" disabled>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-image-input" class="form-label"><strong>Name</strong></label>
+                                <input data-property="image" type="text" class="form-control" id="create-console-image-input" value="https://source.unsplash.com/random/200x250" disabled>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-name-input" class="form-label"><strong>Name</strong></label>
+                                <input data-property="name" type="text" class="form-control" id="create-console-name-input" placeholder="Enter Name" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-title-input" class="form-label"><strong>Title</strong></label>
+                                <input data-property="title" type="text" class="form-control" id="create-console-title-input" placeholder="Enter Title" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-description-input" class="form-label"><strong>Description</strong></label>
+                                <input data-property="description" type="text" class="form-control" id="create-console-description-input" placeholder="Enter Description" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-studio-input" class="form-label"><strong>Studio</strong></label>
+                                <input data-property="studio" type="text" class="form-control" id="create-console-studio-input" placeholder="Enter Studio" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-rating-input" class="form-label"><strong>Rating</strong></label>
+                                <input data-property="esrbRating" type="text" class="form-control" id="create-console-rating-input" placeholder="Enter ESRB Rating" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-price-input" class="form-label"><strong>Price</strong></label>
+                                <input data-property="price" type="number" class="form-control" id="create-console-price-input" placeholder="Enter Price" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="create-quantity-input" class="form-label"><strong>Quantity</strong></label>
+                                <input data-property="quantity" type="number" class="form-control" id="create-console-quantity-input" placeholder="Enter Quantity" required>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer" id="create-console-modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><strong style="pointer-events: none;">Nevermind</strong></button>
+                            <button type="button" form="create-console-form" class="btn btn-primary create-console-button" data-bs-dismiss="modal"><strong style="pointer-events: none;">CREATE</strong></button>
                           </div>
                         </div>
                       </div>
@@ -146,7 +200,15 @@
                     <div class = "card-header">Create</div>
                     <div class = "card-body p-0">
                       <ul class = "filter-list my-0 p-0">
-                        <button class="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#create-game-modal"><strong>NEW GAME</strong></button>
+                        <div class="mb-3">
+                          <button class="btn btn-primary w-75 text-start"  data-bs-toggle="modal" data-bs-target="#create-game-modal"><strong>NEW GAME</strong></button>
+                        </div>
+                        <div class="mb-3">
+                          <button class="btn btn-primary w-75 text-start"  data-bs-toggle="modal" data-bs-target="#create-console-modal"><strong>NEW CONSOLE</strong></button>
+                        </div>
+                        <div class="mb-3">
+                          <button class="btn btn-primary w-75 text-start"  data-bs-toggle="modal" data-bs-target="#create-game-modal"><strong>NEW T-SHIRT</strong></button>
+                        </div>
                       </ul>
                     </div>
                   </div>

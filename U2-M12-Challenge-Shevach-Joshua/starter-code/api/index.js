@@ -63,4 +63,72 @@ export const gameApi = {
   }
 }
 
+export const consoleApi = {
+  async updateConsole(data) {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/consoles`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    let responseText = await response.text();
+    console.log(responseText);
+    return responseText;
+  },
+
+  async deleteConsole(id) {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/consoles/${id}`, {
+      method: "DELETE",
+    });
+  },
+
+  async createConsole(data) {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/consoles`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    let responseText = await response.text();
+    console.log(responseText);
+    return responseText;
+  }
+}
+
+export const tshirtApi = {
+  async updateTshirt(data) {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/t-shirts`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    let responseText = await response.text();
+    console.log(responseText);
+    return responseText;
+  },
+
+  async deleteTshirt(id) {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/t-shirts/${id}`, {
+      method: "DELETE",
+    });
+  },
+
+  async createTshirt(data) {
+    const response = await fetch(`http://ec2-18-191-254-218.us-east-2.compute.amazonaws.com:8080/t-shirts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    let responseText = await response.text();
+    console.log(responseText);
+    return responseText;
+  }
+}
+
 export default api;

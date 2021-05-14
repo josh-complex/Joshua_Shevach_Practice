@@ -1,5 +1,5 @@
 import * as Inventory from "./components/Inventory.js";
-import api, { gameApi } from "./api/index.js";
+import api, { gameApi, consoleApi, tshirtApi } from "./api/index.js";
 
 const heading = document.querySelector("h1");
 heading.style.fontFamily = "Fjalla One, sans-serif";
@@ -17,13 +17,31 @@ const state = {
   }
 };
 
-document.querySelector(".create-button").addEventListener('click', (event) => {
+document.querySelector(".create-game-button").addEventListener('click', (event) => {
   event.preventDefault();
 
   console.log("creating");
 
   let game = {}
   document.getElementById("create-game-form").querySelectorAll(":scope > div > input").forEach( x => {
+    game[x.getAttribute("data-property")] = x.value;
+  });
+
+  gameApi.createGame(game);
+
+  event.stopPropagation();
+
+  setTimeout(() => {
+    location.reload();
+  }, 500);
+});
+document.querySelector(".create-console-button").addEventListener('click', (event) => {
+  event.preventDefault();
+
+  console.log("creating");
+
+  let game = {}
+  document.getElementById("create-console-form").querySelectorAll(":scope > div > input").forEach( x => {
     game[x.getAttribute("data-property")] = x.value;
   });
 
