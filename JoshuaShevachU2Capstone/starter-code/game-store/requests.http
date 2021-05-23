@@ -1,0 +1,9 @@
+GET  http://localhost:8080/game HTTP/1.1
+
+###
+
+GET  http://localhost:8080/console HTTP/1.1
+
+###
+
+GET  http://localhost:8080/tshirt HTTP/1.1
